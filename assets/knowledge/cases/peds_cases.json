@@ -1,0 +1,3980 @@
+{
+  "cases": [
+    {
+      "caseId": "case_peds_neonatal_jaundice_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Baby Chukwuemeka",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Neonate",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Yellow discolouration of skin and eyes noticed on day 3 of life",
+      "diagnosis": {
+        "primary": "Neonatal Jaundice (Physiological)",
+        "keywords": [
+          "neonatal jaundice",
+          "physiological jaundice",
+          "jaundice",
+          "neonatal hyperbilirubinaemia",
+          "hyperbilirubinemia"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Physiological Jaundice",
+          "color": "#1A7A6E",
+          "initial": 45
+        },
+        {
+          "name": "ABO Incompatibility",
+          "color": "#9B3535",
+          "initial": 25
+        },
+        {
+          "name": "G6PD Deficiency",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Neonatal Sepsis",
+          "color": "#5B3F8A",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "phenobarbitone.*jaundice|phenobarbital.*jaundice",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Phenobarbitone is not first-line for neonatal jaundice — phototherapy is. Deducted −15 pts."
+        },
+        {
+          "pattern": "exchange.*transfusion.*without|transfuse.*without.*level",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Exchange transfusion requires checking serum bilirubin level and gestational age thresholds first. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) The yellow colour started on day 2 — we noticed the eyes first, then the skin by day 3.",
+          "examiner_text": "Onset day 2–3 of life. Scleral icterus preceding skin involvement. Born at 39 weeks by SVD.",
+          "type": "history",
+          "label": "Onset of yellowing"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The yellow colour started from the face and has spread to the chest. It hasn't reached the hands and feet yet.",
+          "examiner_text": "Distribution limited to face and trunk — Kramer zones 2–3. Suggests moderate bilirubin elevation.",
+          "type": "history",
+          "label": "Extent of yellowing"
+        },
+        "birth_history": {
+          "patient_text": "(Mother) He was born at 39 weeks, normal delivery. Birth weight 3.2 kg. No help breathing needed. Discharged after one day.",
+          "examiner_text": "Term (39 weeks), SVD, BW 3.2 kg, APGAR 8 and 9. Discharged at 24 hours.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He is breastfeeding — latching well, every 2–3 hours. Good urine output today. Stool is yellow-green.",
+          "examiner_text": "Exclusive breastfeeding, adequate latch. 6 wet nappies. Normal stool colour — no pale/acholic stools.",
+          "type": "history",
+          "label": "Feeding"
+        },
+        "blood_group": {
+          "patient_text": "(Mother) I am blood group O positive. We don't know the baby's blood group yet.",
+          "examiner_text": "Mother O positive. Baby's blood group unknown — ABO incompatibility must be excluded.",
+          "type": "history",
+          "label": "Blood group"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) Nobody in the family has had jaundice or blood problems. First child. No infections during pregnancy.",
+          "examiner_text": "No family history of haemolytic disease. Nulliparous. Antenatal period unremarkable.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) No fever. He has been warm but not hot — temperature was checked and normal.",
+          "examiner_text": "Axillary temperature 36.8°C — no fever. Reduces likelihood of sepsis.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert and crying vigorously. Jaundice visible on face and trunk — not palms or soles. Weight 3.05 kg. Temperature 36.9°C. Heart rate 148 bpm. Breathing rate 46/min.",
+          "examiner_text": "Alert, active, vigorous cry. Jaundice Kramer zones 2–3. Weight loss 4.7% from birth — within acceptable range. Vital signs stable.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_skin": {
+          "patient_text": "Skin: Jaundice confirmed on blanching test. No spots or bruising. Umbilical stump healthy.",
+          "examiner_text": "Blanching confirms jaundice. No petechiae or bruising. Umbilicus clean — no omphalitis.",
+          "type": "exam",
+          "label": "Skin"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft. Liver edge just below the ribs. Spleen not felt. No masses.",
+          "examiner_text": "Liver 2 cm below costal margin — normal for neonate. Spleen not palpable. No organomegaly.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_bilirubin": {
+          "patient_text": "Serum Bilirubin:\n• Total: 185 μmol/L\n• Indirect (unconjugated): 178 μmol/L ↑\n• Direct (conjugated): 7 μmol/L",
+          "examiner_text": "Predominantly unconjugated hyperbilirubinaemia. At day 3 in a term infant, phototherapy threshold ~220 μmol/L. Current level is below threshold.",
+          "type": "investigation",
+          "label": "Serum bilirubin"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 18.2 g/dL\n• Reticulocytes: 3%\n• White cells: 12.4 × 10⁹/L\n• Platelets: 280 × 10⁹/L",
+          "examiner_text": "Hb appropriate for gestation. Mild reticulocytosis. Normal WBC and platelets — no sepsis pattern. No significant haemolysis.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_bloodgroup": {
+          "patient_text": "Baby's blood group: A positive\nDirect Coombs Test: Negative\nG6PD screen: Pending",
+          "examiner_text": "Negative DCT excludes ABO and Rh isoimmunisation. G6PD result pending.",
+          "type": "investigation",
+          "label": "Blood group and Coombs"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_onset",
+          "birth_history",
+          "feeding_history",
+          "ix_bilirubin"
+        ],
+        "shouldAsk": [
+          "blood_group",
+          "exam_general",
+          "ix_fbc",
+          "ix_bloodgroup"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      },
+      "hidden_facts": {
+        "maternal_blood_group": {
+          "unlock_conditions": [
+            "birth_history",
+            "maternal_history"
+          ],
+          "locked_response": "(Mother) I am not sure doctor.",
+          "unlocked_response": "(Mother) I am blood group O positive doctor."
+        },
+        "g6pd_status": {
+          "unlock_conditions": [
+            "family_history",
+            "pmh"
+          ],
+          "locked_response": "(Mother) I don't know about that doctor.",
+          "unlocked_response": "(Mother) Yes doctor, my husband has the sickle cell trait — could that be related?"
+        }
+      }
+    },
+    {
+      "caseId": "case_peds_sam_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 600,
+      "hospital": "ABUTH Zaria",
+      "patient": {
+        "name": "Hauwa Musa",
+        "age": 2,
+        "sex": "Female",
+        "occupation": "Toddler",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Failure to thrive and bilateral leg swelling for 6 weeks",
+      "diagnosis": {
+        "primary": "Severe Acute Malnutrition (Kwashiorkor)",
+        "keywords": [
+          "kwashiorkor",
+          "severe acute malnutrition",
+          "sam",
+          "malnutrition",
+          "protein energy malnutrition"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "SAM — Kwashiorkor",
+          "color": "#1A7A6E",
+          "initial": 50
+        },
+        {
+          "name": "SAM — Marasmus",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Nephrotic Syndrome",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "Congestive Cardiac Failure",
+          "color": "#9B3535",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "high.*protein.*immediately|increase.*protein.*first",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ High protein feeding in oedematous malnutrition causes refeeding syndrome. WHO F-75 starter formula is given first. Deducted −20 pts."
+        },
+        {
+          "pattern": "furosemide|frusemide.*oedema.*malnutrition",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⛔ Diuretics are contraindicated in oedematous malnutrition. Deducted −15 pts."
+        },
+        {
+          "pattern": "iv.*fluid.*rapid|rapid.*rehydration",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Rapid IV fluids in SAM cause fatal cardiac overload. Use oral/NG ReSoMal only unless in shock. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) She stopped growing about 2 months ago. The swelling in her legs started 6 weeks ago and is getting worse. She used to walk well but now she's very weak.",
+          "examiner_text": "Gradual failure to thrive over 2 months with progressive bilateral lower limb oedema for 6 weeks. Loss of previously acquired motor ability.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) I stopped breastfeeding at 12 months when I became pregnant again. She mostly eats pap and sometimes rice. We can't always afford meat or fish.",
+          "examiner_text": "Breastfeeding stopped at 12 months. Diet predominantly carbohydrate-based. Severely inadequate protein and micronutrient intake. Food insecurity present.",
+          "type": "history",
+          "label": "Dietary history"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) Her whole body looks swollen — legs most of all. Face also puffy. Her hair keeps falling out and she has patches on her skin.",
+          "examiner_text": "Generalised oedema. Hair and skin changes noted — relevant physical findings to confirm on examination.",
+          "type": "history",
+          "label": "Swelling and skin"
+        },
+        "sr_diarrhoea": {
+          "patient_text": "(Mother) Yes, she has had watery diarrhoea for 3 days — about 4–5 times per day. Sometimes with mucus.",
+          "examiner_text": "Acute diarrhoea superimposed on chronic malnutrition — dangerous combination. 4–5/day, watery with mucus.",
+          "type": "history",
+          "label": "Diarrhoea"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) She felt warm 2 days ago. She actually seems cold today.",
+          "examiner_text": "Possible fever 2 days ago. Currently hypothermic — a danger sign in severe malnutrition.",
+          "type": "history",
+          "label": "Temperature"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) She had her baby vaccines but I missed some at 9 months. I'm not sure she got the measles vaccine.",
+          "examiner_text": "Incomplete immunisation — likely missed measles vaccine at 9 months. High risk from measles in severe malnutrition.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) She has had malaria twice. No hospital admissions. No known chronic illness.",
+          "examiner_text": "Two prior malaria episodes. No admissions. No chronic illness.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) Five children in the house. Father is a farmer and the income is poor. We live in a single room outside Zaria.",
+          "examiner_text": "Overcrowded household. Rural poverty. High-risk environment.",
+          "type": "history",
+          "label": "Social history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Very quiet and not interested in surroundings. Both legs and feet swollen — pressing leaves a dent. Face puffy. Hair sparse, comes out easily. Skin has dark and light patches. Temperature 35.8°C. Heart rate 96 bpm. Breathing rate 40/min. Oxygen saturation 96%.",
+          "examiner_text": "Apathetic. Bilateral pitting oedema 2+. Facial oedema. Hair sparse, reddish, easily pluckable. Flaky paint dermatosis. Hypothermia 35.8°C — danger sign.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_muac": {
+          "patient_text": "Arm circumference (MUAC): 10.8 cm\nWeight: 7.2 kg\nHeight: 78 cm",
+          "examiner_text": "MUAC 10.8 cm — below 11.5 cm SAM threshold. Weight 7.2 kg vs expected ~12 kg. WHZ −3.8 SD. Meets SAM criteria on both measures.",
+          "type": "exam",
+          "label": "Measurements"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Distended. Liver felt 4 cm below the ribs. Bowel sounds present.",
+          "examiner_text": "Abdominal distension. Hepatomegaly 4 cm. No clinical ascites. Normal bowel sounds.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 7.2 g/dL\n• White cells: 6.8 × 10⁹/L\n• Platelets: 110 × 10⁹/L",
+          "examiner_text": "Severe anaemia. WBC low-normal — immune suppression common in SAM. Mild thrombocytopaenia. Transfusion threshold in SAM is Hb <4 g/dL or cardiac compromise.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_glucose": {
+          "patient_text": "Blood glucose: 2.8 mmol/L",
+          "examiner_text": "Hypoglycaemia — a key danger sign in SAM. Requires immediate treatment with oral or NG 10% dextrose.",
+          "type": "investigation",
+          "label": "Blood glucose"
+        },
+        "ix_lft": {
+          "patient_text": "Electrolytes:\n• Sodium: 128 mmol/L\n• Potassium: 2.9 mmol/L\n• Albumin: 14 g/L",
+          "examiner_text": "Hyponatraemia, severe hypokalaemia, marked hypoalbuminaemia. Low albumin explains the oedema. Electrolytes must be corrected carefully.",
+          "type": "investigation",
+          "label": "Electrolytes and albumin"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "feeding_history",
+          "exam_muac",
+          "ix_glucose",
+          "sr_diarrhoea"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "shx_general",
+          "ix_fbc",
+          "ix_lft",
+          "exam_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      },
+      "hidden_facts": {
+        "feeding_history": {
+          "unlock_conditions": [
+            "birth_history",
+            "social_history"
+          ],
+          "locked_response": "(Mother) I tried to feed him well doctor.",
+          "unlocked_response": "(Mother) I stopped breastfeeding at 3 months when I went back to work."
+        },
+        "socioeconomic_status": {
+          "unlock_conditions": [
+            "social_history"
+          ],
+          "locked_response": "(Mother) We manage doctor.",
+          "unlocked_response": "(Mother) My husband lost his job six months ago. Sometimes we eat once a day."
+        }
+      }
+    },
+    {
+      "caseId": "case_peds_meningitis_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "UITH Ilorin",
+      "patient": {
+        "name": "Abdulrahman Sule",
+        "age": 3,
+        "sex": "Male",
+        "occupation": "Toddler",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Fever, neck stiffness and altered consciousness for 1 day",
+      "diagnosis": {
+        "primary": "Bacterial Meningitis",
+        "keywords": [
+          "bacterial meningitis",
+          "meningitis",
+          "purulent meningitis",
+          "meningococcal meningitis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Bacterial Meningitis",
+          "color": "#9B3535",
+          "initial": 50
+        },
+        {
+          "name": "Viral Meningitis",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "Cerebral Malaria",
+          "color": "#1A7A6E",
+          "initial": 20
+        },
+        {
+          "name": "Febrile Seizure",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "lumbar puncture.*papilloedema|lp.*raised icp",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ LP is contraindicated with signs of raised ICP. Stabilise and exclude raised ICP first. Deducted −20 pts."
+        },
+        {
+          "pattern": "delay.*antibiotics|wait.*culture.*before.*antibiotic",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Antibiotics must NOT be delayed waiting for LP or cultures in suspected bacterial meningitis. Deducted −20 pts."
+        },
+        {
+          "pattern": "aspirin",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Aspirin is contraindicated in children — Reye's syndrome risk. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He was well yesterday morning then developed high fever in the afternoon. By evening he was very irritable. This morning he couldn't move his neck and wasn't recognising me.",
+          "examiner_text": "Rapid onset over ~24 hours. Fever → irritability → neck stiffness → altered consciousness. Classic meningitic progression.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) Very high fever since yesterday. Paracetamol helped a little but it came back.",
+          "examiner_text": "High fever since yesterday — temperature 40.1°C. Partial but incomplete antipyretic response.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "sr_seizures": {
+          "patient_text": "(Mother) Yes — he had a fit this morning. Both arms and legs were shaking for about 4 minutes. He was unconscious after.",
+          "examiner_text": "Single generalised tonic-clonic seizure this morning, ~4 minutes. Prolonged post-ictal period — not consistent with simple febrile convulsion.",
+          "type": "history",
+          "label": "Seizure"
+        },
+        "sr_consciousness": {
+          "patient_text": "(Mother) He's very drowsy — only opens his eyes when I call him loudly. Not responding or talking normally.",
+          "examiner_text": "Altered consciousness — eyes open to voice only. GCS reduced. Formal assessment required.",
+          "type": "history",
+          "label": "Consciousness"
+        },
+        "sr_rash": {
+          "patient_text": "(Mother) I noticed some small red spots on his legs this morning. I thought they were mosquito bites at first.",
+          "examiner_text": "Mother reports small red spots on legs — requires urgent examination to determine if non-blanching.",
+          "type": "history",
+          "label": "Rash"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) He screams when I pick him up — as if being touched hurts him. He's been pulling at his head.",
+          "examiner_text": "Hyperaesthesia and severe headache — consistent with meningeal irritation.",
+          "type": "history",
+          "label": "Irritability and pain"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) He received his EPI vaccines. I'm not sure he received the meningococcal vaccine — we missed some visits.",
+          "examiner_text": "EPI partially completed. Meningococcal vaccine status unclear — missed visits.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He had pneumonia last year and was admitted for 5 days. Otherwise healthy.",
+          "examiner_text": "Admission for pneumonia at ~2 years. Possible recurrent bacterial susceptibility.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Drowsy and irritable when disturbed. GCS 10/15. Temperature 40.2°C. Heart rate 148 bpm. Blood pressure 88/56 mmHg. Breathing rate 44/min. Oxygen saturation 95%. Ill-looking.",
+          "examiner_text": "GCS 10 (E3V3M4). Hypotensive for age. Tachycardia and tachypnoea. Febrile 40.2°C. Toxic appearance.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: Neck is stiff — resists flexion. Kernig's sign positive bilaterally. Pupils equal and reacting. No swelling at the back of the eyes on fundoscopy.",
+          "examiner_text": "Neck rigidity with positive Brudzinski's. Bilateral Kernig's positive. Pupils 4 mm equal reactive. No papilloedema.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "exam_skin": {
+          "patient_text": "Skin: Multiple small red spots on both lower limbs and trunk — they do not disappear when pressed.",
+          "examiner_text": "Non-blanching petechiae — 8–10 lesions, 1–3 mm diameter. Non-blanching rash in a febrile child is a medical emergency.",
+          "type": "exam",
+          "label": "Skin examination"
+        },
+        "ix_lft": {
+          "patient_text": "Blood results:\n• Sodium: 126 mmol/L\n• Glucose: 3.1 mmol/L\n• White cells: 22.4 × 10⁹/L\n• CRP: 186 mg/L\n• Blood cultures: sent — pending",
+          "examiner_text": "Hyponatraemia — possible SIADH. Marked neutrophilic leucocytosis and raised CRP — strong bacterial infection pattern.",
+          "type": "investigation",
+          "label": "Blood results"
+        },
+        "ix_csf": {
+          "patient_text": "CSF (after stabilisation):\n• Appearance: cloudy\n• White cells: 2400 cells/μL\n• Protein: 3.8 g/L\n• Glucose: 0.8 mmol/L\n• Gram stain: organisms seen",
+          "examiner_text": "Turbid CSF. Marked pleocytosis (92% neutrophils). Very high protein. CSF:blood glucose ratio 0.26 — markedly low. Gram-negative diplococci.",
+          "type": "investigation",
+          "label": "CSF analysis"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "sr_fever",
+          "sr_consciousness",
+          "exam_neuro",
+          "exam_skin"
+        ],
+        "shouldAsk": [
+          "sr_seizures",
+          "sr_rash",
+          "ix_csf",
+          "ix_lft",
+          "immunisation"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_sickle_cell_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 600,
+      "hospital": "UCH Ibadan",
+      "patient": {
+        "name": "Tolu Adebayo",
+        "age": 9,
+        "sex": "Male",
+        "occupation": "Primary school",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Severe pain in arms, legs and back for 2 days",
+      "diagnosis": {
+        "primary": "Sickle Cell Vaso-occlusive Crisis",
+        "keywords": [
+          "sickle cell crisis",
+          "vaso-occlusive crisis",
+          "sickle cell disease",
+          "painful crisis",
+          "scd crisis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Vaso-occlusive Crisis",
+          "color": "#9B3535",
+          "initial": 55
+        },
+        {
+          "name": "Osteomyelitis",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Septic Arthritis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Acute Chest Syndrome",
+          "color": "#1A7A6E",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "aspirin",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Aspirin is contraindicated in children — Reye's syndrome risk. Deducted −20 pts."
+        },
+        {
+          "pattern": "nsaid|ibuprofen|diclofenac",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ NSAIDs should be used cautiously in SCD — risk of renal impairment. Use paracetamol and opioids. Deducted −15 pts."
+        },
+        {
+          "pattern": "restrict.*fluid|reduce.*fluid|withhold.*fluid",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Fluid restriction worsens sickling. Adequate hydration is a cornerstone of crisis management. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "The pain started 2 days ago in my legs first, then spread to my arms and back. It came on gradually after very cold weather.",
+          "examiner_text": "Gradual onset over 2 days. Cold exposure — a recognised precipitant of sickling.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "It's a very deep, boring pain — like something is crushing my bones. I can't sleep or walk properly. It's the worst pain I've had.",
+          "examiner_text": "Deep, severe bony pain. Significant functional impairment. Severity warrants parenteral analgesia.",
+          "type": "history",
+          "label": "Pain character"
+        },
+        "hpc_triggers": {
+          "patient_text": "Cold weather and getting dehydrated make my episodes worse. I didn't drink enough water at school the day before.",
+          "examiner_text": "Cold and dehydration — precipitants of vaso-occlusive episodes. Inadequate fluid intake directly preceded this crisis.",
+          "type": "history",
+          "label": "Triggers"
+        },
+        "pmh_general": {
+          "patient_text": "I have sickle cell disease. I've had about 4 painful episodes in the last year. I was admitted last year with a chest problem.",
+          "examiner_text": "Known sickle cell disease (HbSS). Frequent crises — 4 in past year. Previous admission for acute chest syndrome.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "meds_general": {
+          "patient_text": "I take folic acid daily and penicillin twice a day. I was taking another tablet but we ran out 2 months ago and couldn't get more.",
+          "examiner_text": "On folic acid and prophylactic penicillin V. Hydroxyurea discontinued 2 months ago — likely contributing to increased crisis frequency.",
+          "type": "history",
+          "label": "Medications"
+        },
+        "sr_fever": {
+          "patient_text": "I feel warm. My mum checked — 38.5°C. I'm not sure if it's from the pain or something else.",
+          "examiner_text": "Low-grade fever 38.5°C. In SCD, fever may accompany crisis without infection — but infection must be excluded.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "sr_chest": {
+          "patient_text": "No chest pain right now. I'm breathing okay. But I had a chest problem last year and I know what that feels like.",
+          "examiner_text": "No current chest symptoms. Previous ACS — monitor closely as ACS can develop from a painful crisis.",
+          "type": "history",
+          "label": "Chest symptoms"
+        },
+        "fhx_general": {
+          "patient_text": "Both my parents have the sickle cell trait. My older sister also has the same blood condition as me.",
+          "examiner_text": "Both parents AS — autosomal recessive inheritance confirmed. Sibling also HbSS.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: In significant pain, grimacing. Temperature 38.6°C. Heart rate 116 bpm. Blood pressure 104/68 mmHg. Breathing rate 22/min. Oxygen saturation 97% on air. Mild pallor. Slight yellowish tinge to the whites of the eyes.",
+          "examiner_text": "Acute pain. Tachycardia. Chronic pallor and mild scleral icterus — ongoing haemolysis. SpO₂ 97% — acceptable, monitor.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft. Spleen not felt. Liver just palpable below the ribs. No tenderness.",
+          "examiner_text": "Spleen not palpable — consistent with autosplenectomy, typical in older children with HbSS. Liver 2 cm. No splenic sequestration.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "exam_msk": {
+          "patient_text": "Muscles and bones: Tenderness over both upper arms and lower legs when pressed. No joint swelling, warmth, or deformity. Movement limited by pain.",
+          "examiner_text": "Bilateral bony tenderness over humeri and tibiae without joint involvement. No effusion, warmth or erythema.",
+          "type": "exam",
+          "label": "Musculoskeletal examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 7.1 g/dL\n• Reticulocytes: 8%\n• White cells: 18.2 × 10⁹/L\n• Platelets: 430 × 10⁹/L",
+          "examiner_text": "Hb at this patient's known baseline (7–8 g/dL) — no acute haemolytic drop. Raised reticulocytes — ongoing haemolysis. Leucocytosis common in SCD crisis, does not necessarily indicate infection.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_lft": {
+          "patient_text": "Metabolic panel:\n• Sodium: 136 mmol/L\n• Creatinine: 68 μmol/L\n• Bilirubin: 52 μmol/L (unconjugated)\n• LDH: 640 IU/L",
+          "examiner_text": "Normal sodium and creatinine. Raised unconjugated bilirubin and LDH — ongoing haemolysis, not acute deterioration.",
+          "type": "investigation",
+          "label": "Metabolic panel"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "pmh_general",
+          "hpc_character",
+          "meds_general",
+          "exam_general"
+        ],
+        "shouldAsk": [
+          "hpc_triggers",
+          "sr_fever",
+          "sr_chest",
+          "ix_fbc",
+          "exam_msk"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_febrile_convulsion_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "UNIBEN Benin",
+      "patient": {
+        "name": "Chiamaka Osei",
+        "age": 2,
+        "sex": "Female",
+        "occupation": "Toddler",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Convulsion lasting 3 minutes associated with fever",
+      "diagnosis": {
+        "primary": "Simple Febrile Convulsion",
+        "keywords": [
+          "febrile convulsion",
+          "febrile seizure",
+          "simple febrile seizure",
+          "fever convulsion"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Simple Febrile Convulsion",
+          "color": "#1A7A6E",
+          "initial": 55
+        },
+        {
+          "name": "Bacterial Meningitis",
+          "color": "#9B3535",
+          "initial": 25
+        },
+        {
+          "name": "Epilepsy",
+          "color": "#5B3F8A",
+          "initial": 10
+        },
+        {
+          "name": "Hypoglycaemia",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "aspirin",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Aspirin is contraindicated in children — Reye's syndrome. Deducted −20 pts."
+        },
+        {
+          "pattern": "phenytoin.*first|phenobarb.*first.*febrile",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Long-term anticonvulsants are NOT indicated for simple febrile convulsions. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) She had high fever since this morning. About 2 hours after the fever started, she suddenly stiffened then started shaking all over.",
+          "examiner_text": "Fever several hours preceding seizure. Seizure occurred ~2 hours into the febrile illness.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The shaking lasted about 3 minutes. Both arms and legs. Her eyes rolled upward. She was unconscious during it but woke up after — confused a few minutes then okay.",
+          "examiner_text": "Generalised tonic-clonic seizure, 3 minutes — below the 15-minute threshold. Brief post-ictal confusion resolving fully.",
+          "type": "history",
+          "label": "Seizure description"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) Temperature was 39.4°C when I checked before coming. I gave paracetamol before coming to hospital.",
+          "examiner_text": "Temperature 39.4°C at home. Paracetamol given — current temperature will be reduced on examination. Source of fever must be sought.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "sr_consciousness": {
+          "patient_text": "(Mother) She cried and was confused for about 5 minutes after the fit but now she knows me and is alert.",
+          "examiner_text": "Post-ictal period ~5 minutes. Full recovery to baseline — alert and recognising mother.",
+          "type": "history",
+          "label": "Recovery after seizure"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) She had one similar episode at 18 months — also a short fit with fever. No epilepsy was diagnosed. She has been developing normally.",
+          "examiner_text": "One prior febrile seizure at 18 months — increases recurrence risk. No epilepsy diagnosis. Normal development.",
+          "type": "history",
+          "label": "Previous seizures"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) My brother had fits with fever as a child — he grew out of them. No epilepsy in the family.",
+          "examiner_text": "Positive family history of febrile seizures — genetic predisposition relevant to recurrence counselling.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "sr_urt": {
+          "patient_text": "(Mother) She's had a runny nose and cough for 2 days. I think she has a cold.",
+          "examiner_text": "Upper respiratory tract symptoms for 2 days — likely viral URTI as the source of fever.",
+          "type": "history",
+          "label": "Source of fever"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) She is up to date on all vaccines including the 9-month measles vaccine.",
+          "examiner_text": "Fully immunised. Measles and meningococcal vaccines given — reduces probability of those diagnoses.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert, sitting on mother's lap and consolable. Temperature 39.1°C. Heart rate 134 bpm. Breathing rate 36/min. Oxygen saturation 99%. Pink and well-perfused.",
+          "examiner_text": "Alert, interactive. Temperature 39.1°C post-paracetamol. Tachycardia in context of fever. No respiratory or circulatory compromise.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: Fully alert. No neck stiffness. No signs of neck irritation. Tone and reflexes normal. No weakness or asymmetry.",
+          "examiner_text": "GCS 15. Alert and appropriate. Pupils equal reactive. No neck rigidity, no Kernig's, no Brudzinski's. Normal tone and reflexes. No focal deficit.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "exam_throat": {
+          "patient_text": "Throat: Red and inflamed tonsils. Neck glands mildly enlarged. Ears clear. Chest: clear. Runny nose with clear discharge.",
+          "examiner_text": "Tonsillopharyngitis — bilateral erythematous tonsils. Mild cervical lymphadenopathy. TMs clear. Chest clear — viral URTI pattern.",
+          "type": "exam",
+          "label": "ENT and chest"
+        },
+        "ix_glucose": {
+          "patient_text": "Blood glucose: 5.2 mmol/L",
+          "examiner_text": "Blood glucose 5.2 mmol/L — normal. Hypoglycaemia excluded as a cause of the seizure.",
+          "type": "investigation",
+          "label": "Blood glucose"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 13.8 × 10⁹/L (predominantly lymphocytes)\n• Haemoglobin: 11.2 g/dL",
+          "examiner_text": "Mild lymphocytic leucocytosis — consistent with viral infection. No neutrophilia to suggest bacterial source.",
+          "type": "investigation",
+          "label": "FBC"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "sr_fever",
+          "sr_consciousness",
+          "exam_neuro"
+        ],
+        "shouldAsk": [
+          "pmh_general",
+          "fhx_general",
+          "ix_glucose",
+          "exam_throat"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      },
+      "hidden_facts": {
+        "family_seizure_history": {
+          "unlock_conditions": [
+            "family_history"
+          ],
+          "locked_response": "(Mother) Nobody has ever had that in our family.",
+          "unlocked_response": "(Mother) Actually doctor, my husband had something like that as a child too."
+        },
+        "developmental_history": {
+          "unlock_conditions": [
+            "birth_history",
+            "social_history"
+          ],
+          "locked_response": "(Mother) She has been growing normally.",
+          "unlocked_response": "(Mother) She started walking at 13 months and says a few words. The clinic said she is developing well."
+        }
+      }
+    },
+    {
+      "caseId": "case_peds_pneumonia_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "UUTH Uyo",
+      "patient": {
+        "name": "Ifeanyi Eze",
+        "age": 5,
+        "sex": "Male",
+        "occupation": "Nursery school",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Cough, fast breathing and fever for 4 days",
+      "diagnosis": {
+        "primary": "Community-Acquired Pneumonia",
+        "keywords": [
+          "pneumonia",
+          "community acquired pneumonia",
+          "cap",
+          "lower respiratory tract infection",
+          "lrti"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Community-Acquired Pneumonia",
+          "color": "#1A7A6E",
+          "initial": 55
+        },
+        {
+          "name": "Bronchiolitis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Pulmonary TB",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Acute Asthma",
+          "color": "#9B3535",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "antiviral.*pneumonia|oseltamivir.*bacterial",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Antivirals are not routinely indicated for bacterial pneumonia. Deducted −10 pts."
+        },
+        {
+          "pattern": "aminoglycoside.*first.*line|gentamicin.*pneumonia.*child.*first",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Aminoglycosides alone are not first-line for CAP in children. Amoxicillin/ampicillin is first-line. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He started with a runny nose 5 days ago, then cough and fever 4 days ago. The breathing has become very fast since yesterday.",
+          "examiner_text": "Upper respiratory prodrome 5 days ago preceding lower respiratory involvement. Tachypnoea onset over past 24 hours — progressive deterioration.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) He's been coughing a lot — bringing up yellowish-green phlegm. He's breathing very fast and working hard — I can see his ribs.",
+          "examiner_text": "Productive cough with purulent sputum. Visible increased work of breathing — subcostal recession. Symptoms suggest LRTI.",
+          "type": "history",
+          "label": "Cough and breathing"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) High fever — 39°C for 4 days. Paracetamol helps for a while but it keeps coming back.",
+          "examiner_text": "Sustained fever 39°C for 4 days. Partial antipyretic response. Prolonged course suggests bacterial aetiology.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "sr_feeding": {
+          "patient_text": "(Mother) He has been eating much less than normal. He's drinking, but less than usual.",
+          "examiner_text": "Reduced oral intake — relevant to hydration status and clinical severity. Poor feeding with respiratory distress is a red flag.",
+          "type": "history",
+          "label": "Feeding and appetite"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He had malaria 3 months ago. No asthma. No previous breathing-related admissions. No known TB contacts.",
+          "examiner_text": "Prior malaria resolved. No asthma or prior wheeze. No known TB exposure.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) He is fully vaccinated including his pneumococcal vaccines at the right times.",
+          "examiner_text": "PCV13 completed on schedule. Reduces likelihood of pneumococcal disease but does not exclude it.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) Lives with us and 3 siblings. Father smokes inside the house. We use a kerosene stove — the kitchen is inside the house.",
+          "examiner_text": "Passive tobacco smoke and indoor air pollution from kerosene — both risk factors for respiratory illness. Overcrowded household.",
+          "type": "history",
+          "label": "Social and environmental history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Ill-looking, breathing fast. Temperature 39.2°C. Heart rate 128 bpm. Breathing rate 52/min. Oxygen saturation 93% on air. Nostrils flaring. Ribs visible with breathing.",
+          "examiner_text": "RR 52/min — above WHO fast breathing threshold (≥40/min for age 5). SpO₂ 93% — oxygen required. Nasal flaring and subcostal recession. Severe pneumonia criteria met.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_chest": {
+          "patient_text": "Chest:\n• Breathing rate increased with ribs visible\n• Right lower chest dull when tapped\n• Breath sounds reduced at the right base\n• Fine crackling sounds at the right base\n• Bronchial breathing right lower area",
+          "examiner_text": "Subcostal recession and nasal flaring. Dullness right lower zone. Reduced breath sounds with fine crackles and bronchial breathing at right base — lobar consolidation.",
+          "type": "exam",
+          "label": "Chest examination"
+        },
+        "ix_cxr": {
+          "patient_text": "Chest X-ray:\n• Right lower lobe: white opacity\n• Air spaces visible within the opacity\n• No fluid around the lung\n• No collapsed lung",
+          "examiner_text": "Right lower lobe consolidation with air bronchograms. No pleural effusion. No pneumothorax. Consistent with bacterial pneumonia.",
+          "type": "investigation",
+          "label": "Chest X-ray"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 19.4 × 10⁹/L\n• CRP: 112 mg/L\n• Haemoglobin: 10.8 g/dL",
+          "examiner_text": "Marked neutrophilic leucocytosis. CRP markedly elevated. Bacterial infection pattern confirmed. Mild anaemia.",
+          "type": "investigation",
+          "label": "FBC and CRP"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "sr_fever",
+          "exam_chest",
+          "ix_cxr"
+        ],
+        "shouldAsk": [
+          "sr_feeding",
+          "shx_general",
+          "ix_fbc",
+          "exam_general",
+          "immunisation"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      },
+      "hidden_facts": {
+        "tb_contact": {
+          "unlock_conditions": [
+            "social_history",
+            "family_history"
+          ],
+          "locked_response": "I don't know about any sick person around us.",
+          "unlocked_response": "(Mother) Now that you mention it, our neighbour was coughing a lot and lost weight — he died last month."
+        },
+        "hiv_status": {
+          "unlock_conditions": [
+            "pmh",
+            "medication_history",
+            "social_history"
+          ],
+          "locked_response": "(Mother) I don't understand what you mean doctor.",
+          "unlocked_response": "(Mother) Yes doctor, I am positive. I have been on treatment since his birth. He was tested too."
+        }
+      }
+    },
+    {
+      "caseId": "case_peds_dka_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 720,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Adaora Nnamdi",
+        "age": 12,
+        "sex": "Female",
+        "occupation": "Secondary school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Vomiting, deep breathing and drowsiness in a known diabetic",
+      "diagnosis": {
+        "primary": "Diabetic Ketoacidosis (DKA)",
+        "keywords": [
+          "dka",
+          "diabetic ketoacidosis",
+          "diabetic keto acidosis",
+          "ketoacidosis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Diabetic Ketoacidosis",
+          "color": "#9B3535",
+          "initial": 60
+        },
+        {
+          "name": "Hyperosmolar Hyperglycaemic State",
+          "color": "#B86A10",
+          "initial": 10
+        },
+        {
+          "name": "Sepsis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Salicylate Poisoning",
+          "color": "#1A7A6E",
+          "initial": 15
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "rapid.*rehydration|bolus.*20ml.*dka|fast.*fluid.*dka",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Rapid fluid boluses in paediatric DKA increase cerebral oedema risk. Use slow rehydration over 48 hours. Deducted −20 pts."
+        },
+        {
+          "pattern": "bicarbonate|sodium bicarbonate.*dka",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Sodium bicarbonate is NOT recommended in DKA — worsens cerebral oedema. Deducted −15 pts."
+        },
+        {
+          "pattern": "insulin.*before.*fluid|start.*insulin.*first",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ IV fluids must be started BEFORE insulin in DKA. Starting insulin without hydration causes severe hypokalaemia. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "I've been feeling unwell for 3 days. Started with increased thirst and frequent urination, then vomiting since yesterday. My mum noticed I was breathing very deeply this morning.",
+          "examiner_text": "Three-day prodrome of polyuria and polydipsia. Vomiting onset yesterday. Deep breathing this morning — suggesting metabolic acidosis.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "I feel very weak and drowsy. I vomited 6 times today and couldn't keep fluids down. My stomach hurts. My mum said my breath smells fruity.",
+          "examiner_text": "Six vomiting episodes — unable to tolerate fluids. Abdominal pain — common in this metabolic disturbance. Ketotic breath noted by carer.",
+          "type": "history",
+          "label": "Symptoms"
+        },
+        "pmh_general": {
+          "patient_text": "I've had Type 1 diabetes for 3 years. I use insulin — a long-acting one at night and a fast-acting one before meals.",
+          "examiner_text": "Type 1 DM for 3 years. On basal-bolus insulin regimen: glargine 24 units nocte, rapid-acting pre-meal.",
+          "type": "history",
+          "label": "Diabetes history"
+        },
+        "meds_general": {
+          "patient_text": "I ran out of insulin 4 days ago and we haven't been able to get more. I haven't taken any insulin in 4 days.",
+          "examiner_text": "Insulin omission for 4 days — most likely precipitant. Medication supply failure rather than deliberate omission.",
+          "type": "history",
+          "label": "Insulin compliance"
+        },
+        "sr_polyuria": {
+          "patient_text": "Yes — I've been going to the toilet every 30–60 minutes, even at night. I keep drinking but I'm always thirsty.",
+          "examiner_text": "Polyuria and polydipsia — classic osmotic symptoms. Frequency and nocturia suggest significant hyperglycaemia for several days.",
+          "type": "history",
+          "label": "Urinary symptoms"
+        },
+        "sr_fever": {
+          "patient_text": "No fever. I don't think I have an infection — but my chest feels sore from all the vomiting.",
+          "examiner_text": "No fever. Chest discomfort from vomiting. Absence of fever makes infection-triggered episode less likely.",
+          "type": "history",
+          "label": "Fever and infection screen"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Drowsy but responds to voice. Deep, sighing breathing. Fruity smell on the breath. Temperature 37.0°C. Heart rate 124 bpm. Blood pressure 96/62 mmHg. Breathing rate 32/min (deep). Oxygen saturation 99%. Sunken eyes, dry mouth, reduced skin elasticity. Weight 38 kg.",
+          "examiner_text": "GCS 13. Kussmaul breathing — respiratory compensation for metabolic acidosis. Ketotic breath. Tachycardia. Hypotension — significant dehydration. Sunken eyes, reduced turgor, dry mucous membranes.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Tender all over — diffuse, soft. No guarding or rigidity. Bowel sounds reduced. No organ enlargement.",
+          "examiner_text": "Diffuse abdominal tenderness without peritonism. Reduced bowel sounds. Tenderness typically resolves with treatment.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_glucose": {
+          "patient_text": "Blood glucose: 28.4 mmol/L\nBedside ketones: 4.8 mmol/L",
+          "examiner_text": "Significant hyperglycaemia and markedly elevated ketones (>3.0 mmol/L = DKA threshold). Confirms the diagnosis biochemically.",
+          "type": "investigation",
+          "label": "Glucose and ketones"
+        },
+        "ix_abg": {
+          "patient_text": "Blood gas:\n• pH: 7.11\n• Bicarbonate: 8 mmol/L\n• CO₂: 2.4 kPa\n• Anion gap: 26 mEq/L",
+          "examiner_text": "Severe acidosis (pH <7.1). Markedly low bicarbonate. Low CO₂ — respiratory compensation. High anion gap — ketoacidosis. Meets criteria for severe DKA.",
+          "type": "investigation",
+          "label": "Blood gas"
+        },
+        "ix_lft": {
+          "patient_text": "Electrolytes:\n• Sodium: 131 mmol/L\n• Potassium: 3.1 mmol/L\n• Creatinine: 102 μmol/L\n• HbA1c: 12.8%",
+          "examiner_text": "Hyponatraemia (corrected Na 135). Potassium 3.1 — will fall further with insulin; replace before starting insulin if K <3.5. Raised creatinine — pre-renal AKI. HbA1c 12.8% — very poor long-term control.",
+          "type": "investigation",
+          "label": "Electrolytes"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "pmh_general",
+          "meds_general",
+          "ix_glucose",
+          "ix_abg"
+        ],
+        "shouldAsk": [
+          "hpc_character",
+          "sr_polyuria",
+          "ix_lft",
+          "exam_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_epi_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 420,
+      "hospital": "PHC Kaduna",
+      "patient": {
+        "name": "Baby Fatima",
+        "age": 0,
+        "sex": "Female",
+        "occupation": "Infant (6 weeks)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Mother brings 6-week-old for scheduled immunisation — child appears well",
+      "diagnosis": {
+        "primary": "Well-Child Immunisation Visit (EPI)",
+        "keywords": [
+          "immunisation",
+          "vaccination",
+          "epi",
+          "vaccine",
+          "well child",
+          "6 week vaccines"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Routine EPI Immunisation",
+          "color": "#1A7A6E",
+          "initial": 70
+        },
+        {
+          "name": "Missed Vaccines",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Vaccine Contraindication",
+          "color": "#9B3535",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "give.*bcg.*6 week|bcg.*again.*6 week",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ BCG is given at birth — NOT repeated at 6 weeks. Deducted −15 pts."
+        },
+        {
+          "pattern": "vaccinate.*fever|vaccinate.*unwell|give.*vaccine.*sick",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Vaccines should not be given to acutely ill children with moderate-to-severe illness. Always assess the child first. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "birth_vaccines": {
+          "patient_text": "(Mother) She received her birth vaccines in the hospital. The vaccination card shows two were given on day 1.",
+          "examiner_text": "BCG and OPV-0 given at birth — confirmed on card. BCG site should be checked for scar at this visit.",
+          "type": "history",
+          "label": "Birth vaccines"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) She's exclusively breastfeeding — feeding every 2–3 hours. She's gaining weight well with no problems.",
+          "examiner_text": "Exclusive breastfeeding established. Feeding frequency and weight gain appropriate.",
+          "type": "history",
+          "label": "Feeding"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) No fever. She's been well since birth — no illness, no hospital visits.",
+          "examiner_text": "No fever or intercurrent illness. Child appears well — no contraindication to vaccination on this basis.",
+          "type": "history",
+          "label": "Current health"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) Normal pregnancy and delivery. She was born at 39 weeks. Birth weight 3.1 kg. Discharged on day 2 with no problems.",
+          "examiner_text": "Term (39 weeks), SVD, BW 3.1 kg, APGAR 9/10. Discharged day 2. Neonatal period uneventful.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "allergies_general": {
+          "patient_text": "(Mother) No known allergies. No problems after the birth vaccines.",
+          "examiner_text": "No adverse reactions to birth vaccines. No contraindications identified.",
+          "type": "history",
+          "label": "Allergy screen"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert, active, feeding well. Weight: 4.6 kg. Length: 55 cm. Head circumference: 38 cm. Temperature: 36.7°C. No jaundice. Umbilical stump healed. A small round mark visible on the left upper arm.",
+          "examiner_text": "Weight 4.6 kg — appropriate gain (1.5 kg in 6 weeks). BCG scar visible left deltoid. Well child — proceed with 6-week schedule.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Developmental check at 6 weeks: She smiles when you talk to her. She follows a moving object with her eyes. Reflexes are normal.",
+          "examiner_text": "Social smile present. Visual tracking established. Moro and palmar grasp reflexes intact. Development appropriate for 6 weeks.",
+          "type": "exam",
+          "label": "Developmental assessment"
+        },
+        "ix_epi_schedule": {
+          "patient_text": "Vaccines due today at 6 weeks:\n• Penta 1 (injection, right thigh)\n• OPV 1 (oral, 2 drops)\n• PCV 1 (injection, left thigh)\n• Rotavirus 1 (oral)",
+          "examiner_text": "Nigerian EPI 6-week schedule: Penta 1 (DTP-HepB-Hib IM), OPV 1 (oral), PCV13 1 (IM), Rotavirus 1 (oral). BCG not repeated — given at birth. IPV not due until 14 weeks.",
+          "type": "investigation",
+          "label": "Vaccines due today"
+        },
+        "counselling": {
+          "patient_text": "The mother was counselled about: mild fever and injection site swelling expected for 24–48 hours and are normal. Next visit at 10 weeks. Danger signs: fever above 39°C, continuous crying, fits — return immediately. Continue exclusive breastfeeding until 6 months.",
+          "examiner_text": "Post-vaccination counselling complete. Mother informed of expected side effects, danger signs, next visit (10 weeks), and breastfeeding importance.",
+          "type": "history",
+          "label": "Counselling"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "birth_vaccines",
+          "sr_fever",
+          "ix_epi_schedule",
+          "exam_general"
+        ],
+        "shouldAsk": [
+          "feeding_history",
+          "pmh_general",
+          "exam_neuro",
+          "counselling"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_neonatal_sepsis_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Baby Okonkwo",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Neonate (Day 5)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "5-day-old neonate — poor feeding, lethargy and fast breathing since yesterday",
+      "diagnosis": {
+        "primary": "Neonatal Sepsis (Late-Onset)",
+        "keywords": [
+          "neonatal sepsis",
+          "sepsis",
+          "late onset sepsis",
+          "neonatal infection",
+          "septicaemia neonatal"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Late-Onset Neonatal Sepsis",
+          "color": "#9B3535",
+          "initial": 55
+        },
+        {
+          "name": "Neonatal Pneumonia",
+          "color": "#1A7A6E",
+          "initial": 20
+        },
+        {
+          "name": "Neonatal Meningitis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Metabolic Disorder",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "chloramphenicol.*neonate|chloramphenicol.*newborn",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Chloramphenicol causes Grey Baby Syndrome in neonates — cardiovascular collapse. Absolutely contraindicated. Deducted −20 pts."
+        },
+        {
+          "pattern": "tetracycline.*neonate|tetracycline.*newborn",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Tetracyclines are contraindicated in neonates — tooth discolouration and liver toxicity. Deducted −20 pts."
+        },
+        {
+          "pattern": "ceftriaxone.*neonate|ceftriaxone.*newborn",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Ceftriaxone is generally avoided in neonates — displaces bilirubin. Use cefotaxime instead. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He was feeding well the first 3 days. Yesterday he became very sleepy and refused the breast. This morning his breathing became very fast.",
+          "examiner_text": "Well in first 3 days — symptoms onset day 4, worsening day 5. Late-onset presentation (>72 hours).",
+          "type": "history",
+          "label": "Onset"
+        },
+        "birth_history": {
+          "patient_text": "(Mother) Born at home with a traditional birth attendant at 38 weeks. We cut the cord with a blade. We came to hospital on day 2 when he turned yellow.",
+          "examiner_text": "Home delivery by TBA at 38 weeks. Non-sterile cord cutting — significant infection risk. Presented day 2 with jaundice.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He was feeding every 3 hours before. Now he's too weak to suck — took a few drops this morning and fell asleep.",
+          "examiner_text": "Significant change in feeding — previously feeding well, now too weak to sustain feeds. Poor feeding is a key danger sign in neonates.",
+          "type": "history",
+          "label": "Feeding"
+        },
+        "umbilical": {
+          "patient_text": "(Mother) The cord stump looks a bit red and wet today. There's a little yellow discharge.",
+          "examiner_text": "Umbilical discharge and surrounding erythema — possible omphalitis. A portal of entry for neonatal infection.",
+          "type": "history",
+          "label": "Umbilical cord"
+        },
+        "maternal_history": {
+          "patient_text": "(Mother) I had a fever during labour — about 38.5°C. Labour was very long — about 20 hours. My waters broke before the birth attendant arrived — maybe 18 hours before delivery.",
+          "examiner_text": "Maternal intrapartum fever, prolonged labour (20 hours), prolonged ROM (18 hours) — significant risk factors for neonatal sepsis.",
+          "type": "history",
+          "label": "Maternal risk factors"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) He feels cold this morning — not warm. I'm worried because he looks pale.",
+          "examiner_text": "Hypothermia rather than fever — a danger sign in neonatal sepsis. Associated pallor noted.",
+          "type": "history",
+          "label": "Temperature"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Lethargic, floppy, does not cry when examined. Temperature 35.2°C. Heart rate 178 bpm. Breathing rate 72/min. Oxygen saturation 90% on air. Very pale. Mild yellowing. Capillary refill time 4 seconds.",
+          "examiner_text": "Severely ill. Hypothermia (35.2°C) — danger sign. Marked tachycardia and tachypnoea. SpO₂ 90% — oxygen required. Pallor and prolonged CRT — poor perfusion.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_umbilicus": {
+          "patient_text": "Umbilical stump: Redness extending about 1 cm onto the skin of the abdomen. Pus visible. Unpleasant smell.",
+          "examiner_text": "Omphalitis confirmed — erythema extending 1 cm onto abdominal wall, purulent discharge, malodour. Direct portal of entry for sepsis.",
+          "type": "exam",
+          "label": "Umbilical examination"
+        },
+        "exam_chest": {
+          "patient_text": "Chest: Breathing very fast. Ribs visible with each breath. Fine crackling sounds in both lungs.",
+          "examiner_text": "Tachypnoea with subcostal recession. Bilateral fine crepitations — consistent with neonatal pneumonia component.",
+          "type": "exam",
+          "label": "Chest examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 3.2 × 10⁹/L\n• Neutrophils: 1.1 × 10⁹/L\n• Platelets: 68 × 10⁹/L\n• Haemoglobin: 12.4 g/dL",
+          "examiner_text": "Leucopaenia — overwhelming sepsis. I:T ratio 0.38 — sensitive marker of neonatal sepsis. Thrombocytopaenia — raises concern for DIC.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_crp": {
+          "patient_text": "CRP: 148 mg/L\nBlood glucose: 1.8 mmol/L\nBlood cultures: sent — results awaited",
+          "examiner_text": "Markedly elevated CRP. Hypoglycaemia (1.8 mmol/L) — key danger sign. Blood cultures sent — empirical antibiotics must not be delayed.",
+          "type": "investigation",
+          "label": "CRP, glucose and cultures"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "birth_history",
+          "maternal_history",
+          "umbilical",
+          "exam_general"
+        ],
+        "shouldAsk": [
+          "feeding_history",
+          "exam_umbilicus",
+          "ix_fbc",
+          "ix_crp"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_bronchiolitis_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "UUTH Uyo",
+      "patient": {
+        "name": "Emmanuel Bassey",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Infant (8 months)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Cough, wheeze and difficulty feeding for 3 days",
+      "diagnosis": {
+        "primary": "Bronchiolitis",
+        "keywords": [
+          "bronchiolitis",
+          "rsv bronchiolitis",
+          "respiratory syncytial virus",
+          "viral bronchiolitis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Bronchiolitis",
+          "color": "#1A7A6E",
+          "initial": 60
+        },
+        {
+          "name": "Asthma (first episode)",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "Pneumonia",
+          "color": "#9B3535",
+          "initial": 15
+        },
+        {
+          "name": "Cardiac Failure",
+          "color": "#B86A10",
+          "initial": 5
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "salbutamol.*bronchiolitis|ventolin.*bronchiolitis",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Bronchodilators are NOT recommended for bronchiolitis — evidence shows no clinical benefit. Deducted −10 pts."
+        },
+        {
+          "pattern": "antibiotic.*bronchiolitis|amoxicillin.*bronchiolitis",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Antibiotics not indicated for viral bronchiolitis unless secondary bacterial infection clearly suspected. Deducted −10 pts."
+        },
+        {
+          "pattern": "steroid.*bronchiolitis|prednisolone.*bronchiolitis",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Steroids are not recommended for bronchiolitis — no clinical benefit shown. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He had a runny nose for 2 days, then developed cough and noisy breathing. In the last 24 hours he's been struggling to feed — he gets breathless while feeding.",
+          "examiner_text": "Upper respiratory prodrome (2 days) preceding lower respiratory involvement. Feeding difficulty is a key severity marker.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He normally finishes a breastfeed in 10 minutes. Now he pulls away after 2–3 minutes, breathless. He's taking less than half his usual amount.",
+          "examiner_text": "Significantly reduced feeding — less than 50% of normal volume. Inability to complete feeds due to breathlessness is an admission criterion.",
+          "type": "history",
+          "label": "Feeding difficulty"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) He makes a whistling sound when he breathes — especially when breathing out. You can hear it without putting your ear close. His chest looks like it's working hard.",
+          "examiner_text": "Audible expiratory wheeze. Visible increased work of breathing — consistent with lower airway obstruction.",
+          "type": "history",
+          "label": "Wheeze and breathing"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) Mild fever — 37.9°C. It came with the runny nose. No shaking or rigors.",
+          "examiner_text": "Low-grade fever 37.9°C with upper respiratory symptoms — consistent with viral aetiology.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He was born at term. No previous breathing problems. No hospital admissions. No skin rash.",
+          "examiner_text": "Term birth. No prior wheeze or respiratory admissions. No eczema.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) No asthma in the family. His father had a skin condition as a child.",
+          "examiner_text": "No family history of asthma. Paternal eczema — mild atopic family background.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) His older sibling had a cold last week and recovered. We live in a small flat — no cigarette smoke.",
+          "examiner_text": "Contact with symptomatic sibling — likely viral transmission. No passive smoke exposure.",
+          "type": "history",
+          "label": "Contact history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert but tired-looking. Temperature 37.8°C. Heart rate 142 bpm. Breathing rate 58/min. Oxygen saturation 92% on air. Moderate recession between and below the ribs. Nose flaring. No blue discolouration.",
+          "examiner_text": "RR 58/min — markedly elevated. SpO₂ 92% — requires supplemental oxygen. Moderate subcostal and intercostal recession. Nasal flaring. No cyanosis.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_chest": {
+          "patient_text": "Chest:\n• Chest looks larger than normal (barrel-shaped)\n• Fine crackling sounds at both bases at the end of breathing in\n• High-pitched whistling sound throughout breathing out\n• Air entry reduced but equal on both sides",
+          "examiner_text": "Hyperinflation — increased AP diameter. Fine end-inspiratory crackles bilaterally. High-pitched expiratory wheeze throughout. Symmetrically reduced air entry.",
+          "type": "exam",
+          "label": "Chest examination"
+        },
+        "ix_cxr": {
+          "patient_text": "Chest X-ray (if performed):\n• Chest looks overinflated\n• Some patchy areas where air hasn't reached\n• No pneumonia pattern",
+          "examiner_text": "Hyperinflation and peribronchial thickening. Patchy atelectasis. No lobar consolidation. CXR not routinely indicated in typical bronchiolitis.",
+          "type": "investigation",
+          "label": "Chest X-ray"
+        },
+        "ix_spo2_monitor": {
+          "patient_text": "Oxygen level: 92% on room air, improving to 96% with low-flow oxygen.\nFeeding assessment: unable to complete a feed within 20 minutes.",
+          "examiner_text": "SpO₂ 92% — requires supplemental oxygen (target ≥94%). Unable to complete feeds — NG tube feeding indicated. Both criteria met for hospital admission.",
+          "type": "investigation",
+          "label": "Oxygen and feeding assessment"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "feeding_history",
+          "hpc_character",
+          "exam_chest",
+          "ix_spo2_monitor"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "sr_fever",
+          "exam_general",
+          "fhx_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_typhoid_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "UITH Ilorin",
+      "patient": {
+        "name": "Maryam Aliyu",
+        "age": 10,
+        "sex": "Female",
+        "occupation": "Primary school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Prolonged fever, headache and abdominal pain for 10 days",
+      "diagnosis": {
+        "primary": "Typhoid Fever",
+        "keywords": [
+          "typhoid",
+          "enteric fever",
+          "typhoid fever",
+          "salmonella typhi"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Typhoid Fever",
+          "color": "#B86A10",
+          "initial": 50
+        },
+        {
+          "name": "Malaria",
+          "color": "#1A7A6E",
+          "initial": 25
+        },
+        {
+          "name": "Viral Hepatitis",
+          "color": "#9B3535",
+          "initial": 15
+        },
+        {
+          "name": "Bacterial Septicaemia",
+          "color": "#5B3F8A",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "amoxicillin.*typhoid|ampicillin.*typhoid",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ High rates of Salmonella resistance to ampicillin in Nigeria. Ciprofloxacin or ceftriaxone preferred. Deducted −15 pts."
+        },
+        {
+          "pattern": "chloramphenicol.*first",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Chloramphenicol resistance is widespread in Nigeria. Fluoroquinolones or third-generation cephalosporins are now preferred. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "The fever started about 10 days ago. It was mild at first then got worse. I also had a headache from the start. My stomach started hurting about 5 days ago.",
+          "examiner_text": "Gradual onset fever over 10 days with worsening trajectory. Headache from onset. Abdominal pain at day 5.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "The fever is there every day — it goes up in the evenings and comes down a bit in the morning but never fully goes away. I feel very weak. I have dull pain all over my stomach.",
+          "examiner_text": "Step-ladder fever pattern — persistent low-grade in morning rising in evening. Generalised dull abdominal pain.",
+          "type": "history",
+          "label": "Fever pattern"
+        },
+        "sr_diarrhoea": {
+          "patient_text": "I had constipation for the first few days, now I have loose stools — 2–3 times a day. No blood in the stool.",
+          "examiner_text": "Initial constipation transitioning to diarrhoea — a recognised pattern. No bloody stools.",
+          "type": "history",
+          "label": "Bowel symptoms"
+        },
+        "shx_general": {
+          "patient_text": "We buy water from a tanker — we don't always boil it. I sometimes eat at the school canteen. A classmate was absent last week with a similar fever.",
+          "examiner_text": "Unboiled water — key faeco-oral transmission risk. School canteen — communal food source. Contact with symptomatic peer.",
+          "type": "history",
+          "label": "Water and food history"
+        },
+        "sr_rash": {
+          "patient_text": "(Mother) I noticed 2–3 small pink spots on her tummy yesterday. I wasn't sure what they were.",
+          "examiner_text": "Salmon-pink macules reported by mother — requires examination to confirm. Classic physical finding if present.",
+          "type": "history",
+          "label": "Rash"
+        },
+        "pmh_general": {
+          "patient_text": "No previous similar illness. No other chronic illnesses. Never admitted to hospital before.",
+          "examiner_text": "No prior enteric fever or chronic illness. No previous admissions.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "meds_general": {
+          "patient_text": "She took paracetamol and some herbal medicine from the chemist. No antibiotics yet.",
+          "examiner_text": "Symptomatic treatment only — no prior antibiotics. Herbal remedies used — may affect liver function tests.",
+          "type": "history",
+          "label": "Medications"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Ill and toxic-looking. Temperature 39.6°C. Heart rate 88 bpm. Breathing rate 22/min. Blood pressure 100/62 mmHg. White coating on the tongue. Mild yellowing of the eyes. 3 small salmon-pink flat spots on the abdomen.",
+          "examiner_text": "Toxic appearance. Temperature 39.6°C with HR 88 — relative bradycardia for degree of fever. Coated tongue. Mild scleral icterus. Rose spots confirmed.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft. Liver palpable 3 cm below the ribs. Spleen palpable 2 cm below the ribs. Mild tenderness in the right lower area. Bowel sounds active.",
+          "examiner_text": "Hepatomegaly (3 cm) and splenomegaly (2 cm). Mild RIF tenderness — monitor for intestinal complications. Hyperactive bowel sounds.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 3.4 × 10⁹/L\n• Neutrophils: 1.8 × 10⁹/L\n• Platelets: 108 × 10⁹/L",
+          "examiner_text": "Leucopaenia with low neutrophils. Mild thrombocytopaenia. This combination in prolonged fever is a characteristic blood picture.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_culture": {
+          "patient_text": "Blood culture result: Salmonella typhi grown\nSensitivity: Resistant to ampicillin; Sensitive to ciprofloxacin and ceftriaxone\nWidal test: O antigen 1:160, H antigen 1:80",
+          "examiner_text": "Blood culture (gold standard) confirms Salmonella typhi. Resistance to ampicillin — consistent with Nigerian patterns. Widal titres supportive but not diagnostic.",
+          "type": "investigation",
+          "label": "Blood culture and Widal"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "shx_general",
+          "exam_abdomen",
+          "ix_culture"
+        ],
+        "shouldAsk": [
+          "sr_diarrhoea",
+          "sr_rash",
+          "ix_fbc",
+          "exam_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_intussusception_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Kelechi Obi",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Infant (9 months)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Sudden severe intermittent crying and drawing up of legs for 6 hours",
+      "diagnosis": {
+        "primary": "Intussusception",
+        "keywords": [
+          "intussusception",
+          "bowel obstruction intussusception",
+          "ileo-colic intussusception"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Intussusception",
+          "color": "#9B3535",
+          "initial": 55
+        },
+        {
+          "name": "Bowel Obstruction",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Mesenteric Adenitis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Hernia (incarcerated)",
+          "color": "#1A7A6E",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "laxative|enema.*first|give.*purgative",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Laxatives or purgatives are absolutely contraindicated when bowel obstruction is suspected — risk of perforation. Deducted −20 pts."
+        },
+        {
+          "pattern": "delay.*imaging|wait.*and.*see.*crying",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ This presentation is a surgical emergency — delay leads to bowel necrosis. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He was absolutely fine this morning — feeding and playing normally. Then 6 hours ago he suddenly started screaming and drawing his legs up to his tummy. It comes in waves — he screams for 2–3 minutes then stops completely, then screams again.",
+          "examiner_text": "Sudden onset of episodic, colicky, severe pain. Complete wellbeing between episodes initially. Episodic pattern — waves of 2–3 minutes on and off.",
+          "type": "history",
+          "label": "Onset and pattern"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) Between the crying episodes he looks very pale and almost limp — like he's exhausted. The crying episodes are getting more frequent. He vomited twice — first milky, then greenish.",
+          "examiner_text": "Lethargic between episodes — worrying sign. Episodes increasing in frequency. Bilious vomiting — suggests proximal bowel obstruction.",
+          "type": "history",
+          "label": "Between episodes"
+        },
+        "sr_stool": {
+          "patient_text": "(Mother) He passed a normal stool this morning. About 2 hours ago he passed something unusual — it looked like red jelly mixed with mucus. A very small amount.",
+          "examiner_text": "Red, jelly-like, mucoid stool — caused by mucosal ischaemia. Onset 2 hours into illness. Must be confirmed on PR examination.",
+          "type": "history",
+          "label": "Stool"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He has been on breastmilk. We started solid foods 3 weeks ago — pureed banana and pap.",
+          "examiner_text": "Exclusive breastfeeding until 3 weeks ago. Introduction of complementary feeds at 6 months — age-appropriate.",
+          "type": "history",
+          "label": "Feeding history"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He was born at term and has been healthy. He had his rotavirus vaccine at 6 and 10 weeks.",
+          "examiner_text": "Term, healthy infant. Rotavirus vaccination completed.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) No fever at the start, but I think he feels warm now — he's been unwell for 6 hours.",
+          "examiner_text": "No fever initially. Low-grade temperature developing — may reflect stress response or early peritonism.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "exam_general": {
+          "patient_text": "During crying episode: Screaming, legs drawn up, face red. Between episodes: Pale, limp, very quiet. Temperature 37.8°C. Heart rate 158 bpm. Breathing rate 44/min. Mildly dry lips.",
+          "examiner_text": "Classic biphasic pattern. Tachycardia. Mild dehydration. Temperature borderline — monitor.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft between episodes. A firm, sausage-shaped mass palpable on the right side of the abdomen. The right lower area feels emptier than expected.",
+          "examiner_text": "Sausage-shaped mass palpable in right upper quadrant. Relatively empty right iliac fossa — bowel displaced from normal position. These two findings are highly suggestive.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "exam_pr": {
+          "patient_text": "Rectal examination: Blood-stained mucus found on the examining finger.",
+          "examiner_text": "Blood-stained mucous on rectal examination — confirms the history of altered stool.",
+          "type": "exam",
+          "label": "Rectal examination"
+        },
+        "ix_ultrasound": {
+          "patient_text": "Abdominal ultrasound:\n• Target/bull's-eye sign: rings of bowel within bowel seen on cross-section — diagnostic\n• Located at the ileo-colic junction\n• No free fluid suggesting perforation",
+          "examiner_text": "Target sign on ultrasound — gold standard finding. Located at ileo-colic junction. No free fluid — perforation not yet occurred. Urgent surgical referral indicated.",
+          "type": "investigation",
+          "label": "Abdominal ultrasound"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 16.4 × 10⁹/L\n• Haemoglobin: 10.8 g/dL\nAbdominal X-ray: Reduced gas in the right lower area, small bowel slightly distended",
+          "examiner_text": "Leucocytosis — stress response. AXR: paucity of gas in RIF and small bowel dilatation — partial obstruction pattern.",
+          "type": "investigation",
+          "label": "FBC and AXR"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_onset",
+          "sr_stool",
+          "exam_abdomen",
+          "ix_ultrasound"
+        ],
+        "shouldAsk": [
+          "hpc_character",
+          "exam_pr",
+          "ix_fbc",
+          "feeding_history"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_nephrotic_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "UCH Ibadan",
+      "patient": {
+        "name": "Blessing Okafor",
+        "age": 6,
+        "sex": "Female",
+        "occupation": "Primary school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Puffy face and swollen legs for 2 weeks",
+      "diagnosis": {
+        "primary": "Nephrotic Syndrome",
+        "keywords": [
+          "nephrotic syndrome",
+          "nephrotic",
+          "minimal change disease",
+          "childhood nephrotic"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Nephrotic Syndrome",
+          "color": "#5B3F8A",
+          "initial": 55
+        },
+        {
+          "name": "Kwashiorkor",
+          "color": "#1A7A6E",
+          "initial": 20
+        },
+        {
+          "name": "Cardiac Failure",
+          "color": "#9B3535",
+          "initial": 15
+        },
+        {
+          "name": "Acute Glomerulonephritis",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "furosemide.*nephrotic.*first|diuretic.*first.*nephrotic",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Diuretics before steroids can worsen hypovolaemia and precipitate AKI. Steroids are first-line. Deducted −15 pts."
+        },
+        {
+          "pattern": "restrict.*protein.*nephrotic|low.*protein.*nephrotic",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Protein restriction is NOT recommended in nephrotic syndrome — patients lose large amounts and need adequate intake. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) About 2 weeks ago she woke up with puffy eyes in the morning. Then her legs started swelling. By the end of the day the swelling is worse.",
+          "examiner_text": "Insidious onset 2 weeks. Morning periorbital oedema preceding lower limb oedema — typical gravity-dependent pattern.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The swelling is worse on her face in the morning and worse on her legs by evening. She has put on 2 kg in 2 weeks. Her tummy looks slightly bigger too.",
+          "examiner_text": "Diurnal variation in oedema distribution. Weight gain 2 kg in 2 weeks — fluid retention. Possible ascites.",
+          "type": "history",
+          "label": "Oedema pattern"
+        },
+        "sr_urine": {
+          "patient_text": "(Mother) Her urine has been very foamy lately — very bubbly when she passes it. She's also passing much less urine than before.",
+          "examiner_text": "Frothy urine — symptom of significant urinary protein loss. Reduced urine output — relevant to renal function.",
+          "type": "history",
+          "label": "Urine"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) No fever. She seems well in herself — still going to school and eating fairly well.",
+          "examiner_text": "No fever. Preserved general wellbeing despite significant oedema — distinguishes from cardiac or septic oedema.",
+          "type": "history",
+          "label": "Systemic symptoms"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) She had a sore throat about 3 weeks ago — it settled on its own. No other medical problems and she is developing normally.",
+          "examiner_text": "Pharyngitis 3 weeks ago — possible preceding event. Spontaneous resolution without antibiotics.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) No family history of kidney disease or swelling like this that I know of.",
+          "examiner_text": "No family history of renal disease reported.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Well-looking, no distress. Puffy around both eyes. Temperature 36.8°C. Blood pressure 100/62 mmHg. Heart rate 90 bpm. Swelling of both feet and ankles. Weight: 22 kg — up 2 kg from school record 3 weeks ago.",
+          "examiner_text": "Periorbital oedema bilateral. BP 100/62 — normal for age (monitor). Bilateral pitting ankle/foot oedema 2+. Weight gain confirms fluid retention.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Shifting dullness present when the abdomen is tapped in different positions — suggesting fluid inside. No organ enlargement. No tenderness.",
+          "examiner_text": "Shifting dullness — clinical evidence of ascites. No organomegaly. Non-tender.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_urinalysis": {
+          "patient_text": "Urine dipstick:\n• Protein: 4+\n• Blood: trace\n• Sugar: none\n24-hour urine protein: 3.8 g/day",
+          "examiner_text": "Massive proteinuria — 4+ on dipstick, 3.8 g/day. Trace haematuria. No glycosuria. Proteinuria in this range is a key diagnostic criterion.",
+          "type": "investigation",
+          "label": "Urine"
+        },
+        "ix_lft": {
+          "patient_text": "Blood results:\n• Albumin: 16 g/L\n• Total protein: 38 g/L\n• Cholesterol: 9.8 mmol/L\n• Creatinine: 58 μmol/L",
+          "examiner_text": "Severe hypoalbuminaemia — explains the oedema. Low total protein. Marked hypercholesterolaemia. Normal creatinine — renal function preserved.",
+          "type": "investigation",
+          "label": "Blood results"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "sr_urine",
+          "ix_urinalysis",
+          "ix_lft",
+          "exam_abdomen"
+        ],
+        "shouldAsk": [
+          "hpc_character",
+          "pmh_general",
+          "exam_general",
+          "fhx_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      },
+      "hidden_facts": {
+        "steroid_response": {
+          "unlock_conditions": [
+            "pmh",
+            "medication_history"
+          ],
+          "locked_response": "(Mother) This is the first time we are noticing this doctor.",
+          "unlocked_response": "(Mother) Actually doctor, this happened once before when she was four. They gave her some tablets and she got better quickly."
+        },
+        "family_renal_history": {
+          "unlock_conditions": [
+            "family_history"
+          ],
+          "locked_response": "Nobody in our family has kidney problem that I know of.",
+          "unlocked_response": "(Mother) My brother has been on dialysis for two years now. Could that be connected?"
+        }
+      }
+    },
+    {
+      "caseId": "case_peds_anaemia_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "ABUTH Zaria",
+      "patient": {
+        "name": "Sadiya Ibrahim",
+        "age": 3,
+        "sex": "Female",
+        "occupation": "Toddler",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Pallor, weakness and poor appetite for 6 weeks",
+      "diagnosis": {
+        "primary": "Iron Deficiency Anaemia",
+        "keywords": [
+          "iron deficiency anaemia",
+          "iron deficiency anemia",
+          "ida",
+          "nutritional anaemia",
+          "hypochromic microcytic anaemia"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Iron Deficiency Anaemia",
+          "color": "#B86A10",
+          "initial": 55
+        },
+        {
+          "name": "Sickle Cell Anaemia",
+          "color": "#9B3535",
+          "initial": 20
+        },
+        {
+          "name": "Malaria Anaemia",
+          "color": "#1A7A6E",
+          "initial": 15
+        },
+        {
+          "name": "Worm Infestation",
+          "color": "#5B3F8A",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "blood transfusion.*mild|transfuse.*hb.*above.*7",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Blood transfusion not indicated for mild-moderate anaemia without haemodynamic compromise. Oral iron is first-line. Deducted −15 pts."
+        },
+        {
+          "pattern": "iv iron.*first.*line.*child|intravenous iron.*instead.*oral",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Oral iron is first-line for IDA in children. IV iron reserved for intolerance or malabsorption. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) She has been looking pale for about 6 weeks. She gets tired easily — she used to run around but now she stops to rest. Her appetite has reduced.",
+          "examiner_text": "Progressive pallor and fatigue over 6 weeks. Reduced exercise tolerance. Poor appetite contributing to nutritional deficiency.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) She drinks a lot of cow's milk — maybe 5–6 cups a day. She doesn't eat much solid food because she always wants milk. She mostly eats pap and rice, rarely meat or vegetables.",
+          "examiner_text": "Excessive cow's milk intake displacing iron-rich solid foods. Diet predominantly carbohydrate-based with minimal protein and iron sources.",
+          "type": "history",
+          "label": "Dietary history"
+        },
+        "sr_pica": {
+          "patient_text": "(Mother) Yes — she eats soil sometimes when she's outside. And she chews on the wall. I keep stopping her but she does it again.",
+          "examiner_text": "Pica — geophagia and wall plaster ingestion. Classic symptom of iron deficiency. Also raises risk of lead exposure and worm infestation.",
+          "type": "history",
+          "label": "Pica"
+        },
+        "sr_diarrhoea": {
+          "patient_text": "(Mother) No diarrhoea. Stool is normal — once a day.",
+          "examiner_text": "No diarrhoea. Normal bowel habit — no evidence of malabsorptive cause.",
+          "type": "history",
+          "label": "Bowel symptoms"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) She had malaria 4 months ago and was treated. No other illnesses. No hospital admissions.",
+          "examiner_text": "Prior malaria treated. 4-month-old episode unlikely to account for current picture alone.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "deworm_history": {
+          "patient_text": "(Mother) She has never been dewormed. She plays in the compound barefoot sometimes.",
+          "examiner_text": "No prior deworming. Barefoot play outdoors — risk of hookworm. An important contributing cause in Nigeria.",
+          "type": "history",
+          "label": "Deworming history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Pale but alert. Temperature 36.7°C. Heart rate 122 bpm. Breathing rate 28/min. Pale conjunctivae, palms and mucous membranes. No yellowing. No swollen glands. Tongue looks pale and smooth.",
+          "examiner_text": "Significant pallor — conjunctivae, palms, mucous membranes. No jaundice — excludes haemolytic cause. Atrophic glossitis — specific finding in chronic iron deficiency.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_cardiovascular": {
+          "patient_text": "Heart: Fast rate. A soft blowing sound heard at the tip of the heart — grade 2. No other abnormal heart sounds.",
+          "examiner_text": "Tachycardia. Soft systolic flow murmur grade 2/6 — functional, related to increased cardiac output in anaemia. No cardiac failure.",
+          "type": "exam",
+          "label": "Cardiovascular examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 6.8 g/dL\n• Red cell size (MCV): 62 fL\n• Red cell colour (MCH): 18 pg\n• White cells: 8.2 × 10⁹/L\n• Platelets: 480 × 10⁹/L",
+          "examiner_text": "Moderate anaemia. Microcytic (MCV 62 fL) and hypochromic (MCH 18 pg) — consistent with iron deficiency. Normal WBC. Reactive thrombocytosis — common in iron deficiency.",
+          "type": "investigation",
+          "label": "FBC"
+        },
+        "ix_iron_studies": {
+          "patient_text": "Iron studies:\n• Serum iron: low\n• Iron binding capacity: high\n• Ferritin: very low\n• Transferrin saturation: 4%\nStool examination: worm eggs found",
+          "examiner_text": "Low serum iron, raised TIBC, severely depleted ferritin, very low transferrin saturation — all confirming iron deficiency. Stool: hookworm ova identified — contributing cause.",
+          "type": "investigation",
+          "label": "Iron studies"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "feeding_history",
+          "sr_pica",
+          "ix_fbc",
+          "ix_iron_studies"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "deworm_history",
+          "exam_general",
+          "pmh_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_meningococcaemia_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "UITH Ilorin",
+      "patient": {
+        "name": "Yusuf Garba",
+        "age": 4,
+        "sex": "Male",
+        "occupation": "Preschool",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Sudden high fever, non-blanching rash and deteriorating consciousness",
+      "diagnosis": {
+        "primary": "Meningococcal Septicaemia",
+        "keywords": [
+          "meningococcal septicaemia",
+          "meningococcal sepsis",
+          "meningococcemia",
+          "neisseria meningitidis",
+          "meningococcal disease"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Meningococcal Septicaemia",
+          "color": "#9B3535",
+          "initial": 65
+        },
+        {
+          "name": "Bacterial Meningitis",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "HSP (Henoch-Schonlein)",
+          "color": "#B86A10",
+          "initial": 10
+        },
+        {
+          "name": "ITP",
+          "color": "#1A7A6E",
+          "initial": 5
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "delay.*ceftriaxone|wait.*blood.*culture.*before.*antibiotic",
+          "flags": "i",
+          "penalty": 25,
+          "explanation": "⛔ NEVER delay antibiotics in suspected meningococcal disease. Give IV ceftriaxone IMMEDIATELY. Deducted −25 pts."
+        },
+        {
+          "pattern": "lumbar puncture.*first.*meningococcal|lp.*before.*antibiotics.*sepsis",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ LP is CONTRAINDICATED in haemodynamic instability. Stabilise first, start antibiotics, then consider LP. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Father, panicked) He was completely well this morning — playing normally. 8 hours ago he developed high fever and became very irritable. 3 hours ago the rash appeared and he's been getting worse fast.",
+          "examiner_text": "Rapid deterioration over 8 hours. Fever and irritability preceding rash by 5 hours. Rate of deterioration is a critical feature.",
+          "type": "history",
+          "label": "Rapid onset"
+        },
+        "sr_rash": {
+          "patient_text": "(Father) The rash started as a few spots on his legs — I thought they were mosquito bites. But they spread quickly to his trunk and some are now dark-red, large blotches.",
+          "examiner_text": "Rapidly spreading rash — initial petechiae evolving to larger purpuric lesions. This evolution over hours is highly significant.",
+          "type": "history",
+          "label": "Rash"
+        },
+        "sr_consciousness": {
+          "patient_text": "(Father) He knew me 3 hours ago but now he's very hard to wake. He just groans when I shake him.",
+          "examiner_text": "Rapidly deteriorating consciousness — went from alert to barely rousable within 3 hours.",
+          "type": "history",
+          "label": "Consciousness"
+        },
+        "sr_fever": {
+          "patient_text": "(Father) Very high fever — I didn't check the temperature at home. He was shaking at first, then stopped.",
+          "examiner_text": "High fever with initial rigors. Cessation of shaking may reflect progression to septic shock rather than improvement.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "immunisation": {
+          "patient_text": "(Father) He had some vaccines as a baby. I'm not sure about all of them — we may have missed one.",
+          "examiner_text": "Immunisation history incomplete. Meningococcal vaccine status uncertain.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "pmh_general": {
+          "patient_text": "(Father) Completely healthy child. No previous admissions. No chronic illness.",
+          "examiner_text": "Previously well. No prior admissions. No known immunodeficiency.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: CRITICALLY ILL. GCS 8/15. Temperature 40.4°C. Heart rate 178 bpm. Blood pressure 72/40 mmHg. Breathing rate 52/min. Oxygen saturation 88% on air. Capillary refill 6 seconds. Cold hands and feet. Mottled skin.",
+          "examiner_text": "GCS 8. Hypotension 72/40 — septic shock. Severe tachycardia and tachypnoea. SpO₂ 88%. Prolonged CRT, cold peripheries, mottling — distributive shock. Requires resuscitation simultaneously with history-taking.",
+          "type": "exam",
+          "label": "General — immediate assessment"
+        },
+        "exam_skin": {
+          "patient_text": "Skin: Widespread non-blanching purple-red rash on trunk, limbs and face. Multiple star-shaped lesions up to 2 cm. Some have darkened areas in the centre.",
+          "examiner_text": "Widespread purpuric rash — stellate, non-blanching lesions up to 2 cm with central necrosis beginning. Purpura fulminans — DIC in progress. Medical emergency.",
+          "type": "exam",
+          "label": "Skin examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: GCS 8. Does not follow commands. Pupils 4 mm, slow to react. Mild neck stiffness.",
+          "examiner_text": "GCS 8. Sluggish pupils. Mild meningism — concurrent meningitis. LP absolutely contraindicated in this context.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "ix_fbc": {
+          "patient_text": "FBC:\n• White cells: 2.1 × 10⁹/L\n• Platelets: 24 × 10⁹/L\n• Haemoglobin: 8.4 g/dL\nCoagulation:\n• PT and APTT: markedly prolonged\n• Fibrinogen: very low",
+          "examiner_text": "Leucopaenia — overwhelming sepsis. Severe thrombocytopaenia with coagulopathy — DIC confirmed. Life-threatening multi-organ failure.",
+          "type": "investigation",
+          "label": "FBC and coagulation"
+        },
+        "ix_culture": {
+          "patient_text": "Blood cultures: sent\nLactate: 8.4 mmol/L\nBlood glucose: 1.6 mmol/L",
+          "examiner_text": "Markedly elevated lactate — severe tissue hypoperfusion. Critical hypoglycaemia — treat immediately with IV dextrose. Antibiotics must already be running.",
+          "type": "investigation",
+          "label": "Lactate, glucose and cultures"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "sr_rash",
+          "exam_skin",
+          "exam_general",
+          "ix_fbc"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "sr_consciousness",
+          "ix_culture",
+          "immunisation"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_cerebral_malaria_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "UCH Ibadan",
+      "patient": {
+        "name": "Chioma Eze",
+        "age": 5,
+        "sex": "Female",
+        "occupation": "Nursery school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Unconscious child with high fever and repeated seizures",
+      "diagnosis": {
+        "primary": "Cerebral Malaria",
+        "keywords": [
+          "cerebral malaria",
+          "severe malaria cerebral",
+          "malaria coma",
+          "falciparum cerebral malaria"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Cerebral Malaria",
+          "color": "#1A7A6E",
+          "initial": 55
+        },
+        {
+          "name": "Bacterial Meningitis",
+          "color": "#9B3535",
+          "initial": 25
+        },
+        {
+          "name": "Viral Encephalitis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Hypoglycaemic Coma",
+          "color": "#B86A10",
+          "initial": 5
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "quinine.*cerebral.*first|oral quinine.*coma",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ IV artesunate is first-line for severe malaria — not quinine. Artesunate reduces mortality compared to quinine. Deducted −15 pts."
+        },
+        {
+          "pattern": "chloroquine",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Chloroquine-resistant P. falciparum is endemic in Nigeria. Never use chloroquine for severe malaria. Deducted −20 pts."
+        },
+        {
+          "pattern": "dexamethasone.*cerebral malaria|steroid.*cerebral malaria",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Corticosteroids are NOT recommended in cerebral malaria — trials showed increased mortality. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Father) She had fever for 2 days — we thought it was malaria and gave her tablets at home. Yesterday she started having fits. This morning she wouldn't wake up.",
+          "examiner_text": "Two-day febrile illness treated at home with oral antimalarial. Seizures on day 2. Failure to rouse on day 3 despite home treatment.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "sr_seizures": {
+          "patient_text": "(Father) She had 3 fits at home — each lasting 3–5 minutes. Full body shaking. She was unconscious between some of them.",
+          "examiner_text": "Three generalised convulsions, 3–5 minutes each. Impaired consciousness between seizures — not returning to baseline. Critical feature distinguishing from simple febrile seizures.",
+          "type": "history",
+          "label": "Seizures"
+        },
+        "sr_fever": {
+          "patient_text": "(Father) Very high fever — 40°C at home. She was sweating a lot before the fits.",
+          "examiner_text": "High fever (40°C) preceding seizure onset. Sweating consistent with febrile illness.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "shx_travel": {
+          "patient_text": "(Father) We live in a peri-urban area — many mosquitoes. She was bitten a lot last week after heavy rain. No travel elsewhere.",
+          "examiner_text": "Peri-urban environment. Heavy recent rain — breeding conditions. High endemicity — no travel required.",
+          "type": "history",
+          "label": "Exposure history"
+        },
+        "meds_general": {
+          "patient_text": "(Father) We gave her 2 doses of Coartem at home yesterday — but she vomited after the second dose. She may not have absorbed it.",
+          "examiner_text": "Two doses of artemether-lumefantrine given. Vomiting after second dose — inadequate absorption. Oral treatment failure: IV therapy now required.",
+          "type": "history",
+          "label": "Prior treatment"
+        },
+        "pmh_general": {
+          "patient_text": "(Father) She had malaria twice before at younger ages — treated successfully both times. No chronic illness. Vaccines up to date.",
+          "examiner_text": "Two prior malaria episodes — treated successfully. No chronic illness.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: UNCONSCIOUS. Does not respond to voice or pain in a purposeful way. Temperature 40.1°C. Heart rate 162 bpm. Blood pressure 88/54 mmHg. Breathing rate 46/min — irregular. Oxygen saturation 91%. Severely pale.",
+          "examiner_text": "Blantyre Coma Scale 2/5 — meets cerebral malaria coma criterion (BCS ≤2). Tachycardia, hypotension. Irregular breathing (Cheyne-Stokes). SpO₂ 91% — oxygen required. Severe pallor.",
+          "type": "exam",
+          "label": "General — coma assessment"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: BCS 2/5. Does not follow commands. Pupils unequal — right larger, reacting slowly; left smaller, reactive. Abnormal posture on one side.",
+          "examiner_text": "BCS 2. Unequal pupils — asymmetry raises concern for herniation. Decerebrate posturing. Signs of raised intracranial pressure.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Liver and spleen both enlarged — liver 5 cm and spleen 4 cm below the ribs. No fluid.",
+          "examiner_text": "Hepatosplenomegaly — liver 5 cm, spleen 4 cm. Consistent with systemic parasitic infection.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_rdt": {
+          "patient_text": "Malaria rapid test: Positive\nBlood film: 6.2% of red blood cells infected\nBlood glucose: 1.4 mmol/L",
+          "examiner_text": "RDT positive for P. falciparum. Parasitaemia 6.2% — above the 2% hyperparasitaemia threshold. Critical hypoglycaemia — treat immediately with IV dextrose.",
+          "type": "investigation",
+          "label": "Malaria test and glucose"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 4.8 g/dL\n• Platelets: 34 × 10⁹/L\n• White cells: 11.8 × 10⁹/L",
+          "examiner_text": "Severe anaemia (Hb 4.8 g/dL) with respiratory distress — meets transfusion criteria. Severe thrombocytopaenia — near-universal in P. falciparum.",
+          "type": "investigation",
+          "label": "FBC"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "sr_seizures",
+          "exam_general",
+          "ix_rdt",
+          "ix_fbc"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "meds_general",
+          "exam_neuro",
+          "shx_travel"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_vsd_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Oluwaseun Adeyemi",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Infant (4 months)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Poor weight gain, fast breathing and sweating during feeds since birth",
+      "diagnosis": {
+        "primary": "Ventricular Septal Defect (VSD) with Heart Failure",
+        "keywords": [
+          "ventricular septal defect",
+          "vsd",
+          "congenital heart disease",
+          "heart failure infant",
+          "cardiac failure infant"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Large VSD with Heart Failure",
+          "color": "#9B3535",
+          "initial": 50
+        },
+        {
+          "name": "ASD",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "PDA",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Bronchiolitis",
+          "color": "#1A7A6E",
+          "initial": 15
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "digoxin.*infant.*without.*echo|digoxin.*without.*diagnosis",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Digoxin should only be used after echocardiographic confirmation. Deducted −15 pts."
+        },
+        {
+          "pattern": "nsaid|ibuprofen.*heart failure",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ NSAIDs cause fluid retention and worsen cardiac failure. Avoid in infants with heart failure. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) Since about 4–6 weeks of age he has been breathing very fast especially during feeds. He sweats on his forehead when feeding. Feeds take a very long time — he's exhausted after each feed.",
+          "examiner_text": "Symptoms from 4–6 weeks. Fast breathing and diaphoresis during feeding — signs of increased cardiac work. Feeds taking excessively long.",
+          "type": "history",
+          "label": "Onset of symptoms"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) A full feed should take 20 minutes but he takes much longer. He falls asleep after a few minutes — too tired to continue. He's not gaining weight well.",
+          "examiner_text": "Feeds far beyond normal duration. Infant exhausted mid-feed. Poor weight gain — inadequate caloric intake and increased energy expenditure.",
+          "type": "history",
+          "label": "Feeding"
+        },
+        "birth_history": {
+          "patient_text": "(Mother) Born at 38 weeks, normal delivery. Birth weight 3.4 kg. The doctor heard a heart sound at birth but said we should wait and see. We were never referred.",
+          "examiner_text": "Murmur noted at birth — not followed up. Term, 3.4 kg. Failure to refer is clinically relevant.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He has had 2 chest infections in the last 4 months. Currently on antibiotics for the second one. He's been growing slowly — below the normal range for weight.",
+          "examiner_text": "Recurrent LRTI — increased susceptibility due to pulmonary congestion. Currently on antibiotics. Growth below 3rd centile.",
+          "type": "history",
+          "label": "Infections and growth"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) No family history of heart problems in children. No consanguinity. Normal pregnancy — no diabetes or illnesses.",
+          "examiner_text": "No family history of CHD. No consanguinity. Normal antenatal course.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Breathing fast at rest. Breathing rate 54/min. Heart rate 162 bpm. Temperature 37.2°C. Oxygen saturation 94% on air. Weight: 4.8 kg — birth weight 3.4 kg — poor gain for 4 months. Sweating. Liver palpable 4 cm below the ribs. No blue discolouration.",
+          "examiner_text": "Tachypnoea at rest. Tachycardia. SpO₂ 94% — borderline. Weight gain only 1.4 kg in 4 months — expected ~4 kg. Hepatomegaly 4 cm — right heart failure/congestion. Diaphoresis. No cyanosis.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_cardiovascular": {
+          "patient_text": "Heart examination:\n• Apex beat displaced to the side\n• A vibration felt at the left lower chest border\n• Loud harsh pansystolic murmur at the lower left sternal border — heard across the whole chest",
+          "examiner_text": "Displaced apex beat — cardiomegaly. Systolic thrill at LLSB. Loud pansystolic murmur grade 4/6 — classic VSD murmur. Loud murmur and thrill suggest large defect.",
+          "type": "exam",
+          "label": "Cardiovascular examination"
+        },
+        "ix_echo": {
+          "patient_text": "Echocardiogram:\n• Large hole between the lower chambers — 10 mm\n• Blood flowing from left to right through the hole\n• Left-sided chambers enlarged\n• Elevated pressure on the right side of the heart",
+          "examiner_text": "Large perimembranous VSD (10 mm). Left-to-right shunt Qp:Qs 3.2:1 — significant. LA and LV dilated — volume overload. RVSP 52 mmHg — pulmonary hypertension developing. Surgical closure indicated.",
+          "type": "investigation",
+          "label": "Echocardiogram"
+        },
+        "ix_cxr": {
+          "patient_text": "Chest X-ray:\n• Heart looks enlarged\n• Lung vessels look more prominent than normal\n• No areas of white lung",
+          "examiner_text": "Cardiomegaly (CTR 0.62). Increased pulmonary vascular markings — pulmonary plethora from left-to-right shunting. No consolidation.",
+          "type": "investigation",
+          "label": "Chest X-ray"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "feeding_history",
+          "birth_history",
+          "exam_cardiovascular",
+          "ix_echo"
+        ],
+        "shouldAsk": [
+          "pmh_general",
+          "exam_general",
+          "ix_cxr",
+          "hpc_onset"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_dehydration_gastro_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "PHC Enugu",
+      "patient": {
+        "name": "Nnamdi Obi",
+        "age": 1,
+        "sex": "Male",
+        "occupation": "Infant (14 months)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Diarrhoea 8 times and vomiting 4 times in the last 24 hours",
+      "diagnosis": {
+        "primary": "Acute Gastroenteritis with Moderate Dehydration",
+        "keywords": [
+          "gastroenteritis",
+          "acute gastroenteritis",
+          "dehydration",
+          "diarrhoea dehydration",
+          "viral gastroenteritis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Acute Gastroenteritis",
+          "color": "#1A7A6E",
+          "initial": 60
+        },
+        {
+          "name": "Intussusception",
+          "color": "#9B3535",
+          "initial": 15
+        },
+        {
+          "name": "Salmonella Infection",
+          "color": "#B86A10",
+          "initial": 15
+        },
+        {
+          "name": "Malaria",
+          "color": "#5B3F8A",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "antibiotic.*watery diarrhoea|amoxicillin.*gastro",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Antibiotics NOT routinely indicated for watery diarrhoea in children — most is viral. ORS is the treatment. Deducted −10 pts."
+        },
+        {
+          "pattern": "antidiarrhoeal|loperamide.*child|lomotil.*child",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Antidiarrhoeals are CONTRAINDICATED in children under 12 — risk of paralytic ileus and death. Deducted −20 pts."
+        },
+        {
+          "pattern": "iv fluid.*mild dehydration|drip.*mild dehydration",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ IV fluids are not first-line for mild-moderate dehydration. ORS is WHO/IMCI recommended. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) Diarrhoea started yesterday morning — watery, no blood. He's passed stool 8 times. He vomited 4 times. Fever started last night.",
+          "examiner_text": "Acute onset diarrhoea (8 episodes) and vomiting (4 episodes) over 24 hours. Watery non-bloody stool. Viral pattern.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The stool is watery and yellow — no blood, no mucus. Large amounts each time. He's been crying a lot and seems uncomfortable in his tummy.",
+          "examiner_text": "Watery, yellow, large-volume stools. No blood or mucus — not dysentery. Abdominal discomfort — consistent with cramping.",
+          "type": "history",
+          "label": "Stool description"
+        },
+        "sr_urine": {
+          "patient_text": "(Mother) He's barely passed any urine today — I've only changed one wet nappy since this morning and it was very small and dark.",
+          "examiner_text": "Markedly reduced urine output — one small concentrated nappy in ~8 hours. Key clinical indicator of dehydration severity.",
+          "type": "history",
+          "label": "Urine output"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He's refusing food. He takes a few sips of water but vomits after. I haven't given ORS yet — I didn't know I should.",
+          "examiner_text": "Refusing feeds. Unable to retain oral fluids. ORS not yet started — important management gap.",
+          "type": "history",
+          "label": "Oral intake"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) Fever last night — 38.3°C. Still present. I gave paracetamol syrup.",
+          "examiner_text": "Fever 38.3°C for ~12 hours. Paracetamol given.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) My older child had diarrhoea last week and got better. We use tap water — I don't always boil it for the baby.",
+          "examiner_text": "Symptomatic household contact. Unboiled tap water — possible contamination. Infectious gastroenteritis likely.",
+          "type": "history",
+          "label": "Contact and water history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Irritable and crying. Temperature 38.4°C. Heart rate 148 bpm. Breathing rate 36/min. Sunken eyes. Sunken soft spot on head. Dry mouth and tongue. When you pinch the skin, it goes back slowly — takes 2–3 seconds.",
+          "examiner_text": "Irritable. Sunken eyes and fontanelle. Dry mucous membranes. Skin turgor reduced (pinch recoil 2–3 seconds). Moderate dehydration — WHO IMCI Plan B.",
+          "type": "exam",
+          "label": "Dehydration assessment"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft. Mild tenderness all over. Bowel sounds active. No organ enlargement. No guarding.",
+          "examiner_text": "Diffuse mild tenderness — intestinal irritation. Hyperactive bowel sounds. No organomegaly. No peritonism.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_glucose": {
+          "patient_text": "Blood glucose: 3.4 mmol/L\nElectrolytes:\n• Sodium: 134 mmol/L\n• Potassium: 3.2 mmol/L",
+          "examiner_text": "Glucose borderline low — monitor. Mild hyponatraemia and hypokalaemia from stool losses. Electrolytes relevant to ORS composition.",
+          "type": "investigation",
+          "label": "Glucose and electrolytes"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "sr_urine",
+          "exam_general",
+          "feeding_history"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "sr_fever",
+          "shx_general",
+          "ix_glucose"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_meningitis_tb_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 720,
+      "hospital": "ABUTH Zaria",
+      "patient": {
+        "name": "Amina Bello",
+        "age": 4,
+        "sex": "Female",
+        "occupation": "Preschool",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "3-week history of gradual onset fever, headache and behaviour change",
+      "diagnosis": {
+        "primary": "Tuberculous Meningitis",
+        "keywords": [
+          "tb meningitis",
+          "tuberculous meningitis",
+          "tbm",
+          "tuberculosis meningitis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Tuberculous Meningitis",
+          "color": "#B86A10",
+          "initial": 45
+        },
+        {
+          "name": "Bacterial Meningitis",
+          "color": "#9B3535",
+          "initial": 25
+        },
+        {
+          "name": "Viral Meningitis",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "Brain Abscess",
+          "color": "#1A7A6E",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "fluoroquinolone.*tb|ciprofloxacin.*tbm.*monotherapy",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Fluoroquinolone monotherapy is not appropriate for TBM. Standard four-drug regimen plus dexamethasone required. Deducted −15 pts."
+        },
+        {
+          "pattern": "stop.*steroid.*tbm|avoid.*dexamethasone.*tbm",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Dexamethasone reduces mortality in TBM — recommended in all cases for the first 4 weeks. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) She's been unwell for 3 weeks — it started slowly. Fever that comes and goes, headache, she stopped eating well. Last week she became confused and stopped playing with her siblings.",
+          "examiner_text": "Insidious onset over 3 weeks. Fever, anorexia and headache preceding neurological involvement. Behavioural change and social withdrawal in the last week — CNS involvement.",
+          "type": "history",
+          "label": "Gradual onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) She has severe headache — she holds her head and cries. Her neck has become stiff this week. She's vomited 3 times today. Light seems to hurt her eyes.",
+          "examiner_text": "Severe headache with meningism developing in week 3. Photophobia. Vomiting — raised ICP. Gradual accumulation of meningeal signs.",
+          "type": "history",
+          "label": "Headache and meningism"
+        },
+        "tb_contact": {
+          "patient_text": "(Mother) Yes — her grandfather has been coughing for months. He lost a lot of weight. He lives with us. He was recently tested and found to have TB. He started treatment one month ago.",
+          "examiner_text": "Close household contact with smear-positive TB. Lives in same home. Grandfather only recently started treatment. High-risk exposure over several months.",
+          "type": "history",
+          "label": "TB contact"
+        },
+        "sr_weight_loss": {
+          "patient_text": "(Mother) She has lost weight over these 3 weeks. She has no appetite. She looks thinner. I noticed a small swelling in her neck 2 weeks ago.",
+          "examiner_text": "Weight loss and anorexia — constitutional symptoms. Cervical swelling for 2 weeks — lymphadenopathy, consistent with extrapulmonary involvement.",
+          "type": "history",
+          "label": "Weight loss and neck swelling"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) She received BCG at birth — there's a scar on her left arm.",
+          "examiner_text": "BCG given at birth — confirmed by scar. BCG reduces risk of disseminated TB and meningitis significantly but does not provide complete protection.",
+          "type": "history",
+          "label": "BCG status"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) No previous illnesses. No HIV diagnosis. Not on any medications.",
+          "examiner_text": "No prior illness. HIV status reportedly negative — should be confirmed. No medications.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Ill and drowsy. GCS 12/15. Temperature 38.4°C. Heart rate 112 bpm. Breathing rate 28/min. Blood pressure 96/60. Thin appearance. Firm, matted swollen glands on the right side of the neck — 2–3 glands.",
+          "examiner_text": "GCS 12 — moderately impaired. Wasted appearance. Firm, matted cervical lymphadenopathy right side — consistent with tuberculous lymphadenitis.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: GCS 12. Neck stiffness present. Kernig's sign positive. Right eye doesn't move fully to the side. No swelling at back of eyes — but small yellow-white spots seen on the retina.",
+          "examiner_text": "Neck rigidity and positive Kernig's. Right lateral rectus palsy (CN VI) — false localising sign of raised ICP. No papilloedema. Choroidal tubercles on fundoscopy — highly specific finding for miliary TB.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "ix_csf": {
+          "patient_text": "CSF (after CT head — no herniation seen):\n• Appearance: clear/yellow-tinged\n• White cells: 240/μL (mainly lymphocytes)\n• Protein: 2.8 g/L\n• Glucose: 1.2 mmol/L\n• Special stain: positive\n• Molecular test: Mycobacterium tuberculosis detected",
+          "examiner_text": "Clear/xanthochromic CSF. Lymphocytic pleocytosis (85%). Markedly elevated protein. Very low CSF glucose (CSF:blood ratio 0.3). AFB smear positive. GeneXpert: M. tuberculosis detected. CSF profile confirms diagnosis.",
+          "type": "investigation",
+          "label": "CSF analysis"
+        },
+        "ix_cxr": {
+          "patient_text": "Chest X-ray: Tiny white spots spread throughout both lungs — very fine, uniform pattern.",
+          "examiner_text": "Miliary pattern — diffuse bilateral micronodular opacities 1–3 mm. Confirms disseminated TB with meningitis.",
+          "type": "investigation",
+          "label": "Chest X-ray"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "tb_contact",
+          "hpc_onset",
+          "ix_csf",
+          "exam_neuro"
+        ],
+        "shouldAsk": [
+          "sr_weight_loss",
+          "exam_general",
+          "ix_cxr",
+          "immunisation"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_henoch_schonlein_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "UUTH Uyo",
+      "patient": {
+        "name": "Ngozi Enwere",
+        "age": 7,
+        "sex": "Female",
+        "occupation": "Primary school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Rash on the legs, joint pains and abdominal pain for 5 days",
+      "diagnosis": {
+        "primary": "Henoch-Schönlein Purpura (IgA Vasculitis)",
+        "keywords": [
+          "henoch schonlein purpura",
+          "hsp",
+          "iga vasculitis",
+          "purpura abdomen joints child"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Henoch-Schönlein Purpura",
+          "color": "#5B3F8A",
+          "initial": 55
+        },
+        {
+          "name": "Meningococcal Septicaemia",
+          "color": "#9B3535",
+          "initial": 20
+        },
+        {
+          "name": "Idiopathic Thrombocytopaenic Purpura",
+          "color": "#B86A10",
+          "initial": 15
+        },
+        {
+          "name": "Reactive Arthritis",
+          "color": "#1A7A6E",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "antibiotic.*hsp.*without.*infection|amoxicillin.*purpura.*empirical",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ HSP is autoimmune — antibiotics only if active infection identified. Deducted −10 pts."
+        },
+        {
+          "pattern": "aspirin",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Aspirin is contraindicated in children — Reye's syndrome risk. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) She had a throat infection 2 weeks ago — it settled with rest. Then 5 days ago she developed this rash on her legs. Joint pains started next day, and stomach pain the day after.",
+          "examiner_text": "Throat infection 2 weeks ago — possible streptococcal trigger. Rash onset day 1, arthritis day 2, abdominal pain day 3 — sequential multi-system involvement.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "sr_rash": {
+          "patient_text": "(Mother) The rash is mainly on both legs — the lower half. Some on the buttocks. They're raised, purple-red spots that don't go away when I press them. Not itchy.",
+          "examiner_text": "Symmetrical raised non-blanching purpuric rash on lower limbs and buttocks. Non-pruritic. Distribution on extensor/dependent surfaces.",
+          "type": "history",
+          "label": "Rash"
+        },
+        "sr_joints": {
+          "patient_text": "My knees and ankles hurt — both sides. They're a little swollen. I can still walk but it hurts. My wrists hurt a little too.",
+          "examiner_text": "Bilateral joint involvement — knees, ankles, wrists. Swelling present. Functional limitation but ambulation preserved.",
+          "type": "history",
+          "label": "Joint symptoms"
+        },
+        "sr_abdomen": {
+          "patient_text": "Yes, I've had crampy tummy pain — it comes and goes. I vomited once. No blood in my stool that I've seen.",
+          "examiner_text": "Colicky abdominal pain — consistent with gut vasculitis. One episode of vomiting. No visible blood in stool.",
+          "type": "history",
+          "label": "Abdominal pain"
+        },
+        "sr_urine": {
+          "patient_text": "(Mother) Her urine looked slightly pink-brown yesterday. Today it looks more normal.",
+          "examiner_text": "Transient haematuria yesterday — suggests renal involvement. Must confirm with urinalysis.",
+          "type": "history",
+          "label": "Urine"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) No previous similar illness. No known allergies. Normal development.",
+          "examiner_text": "First episode. No prior vasculitic or allergic illness.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Well, walking with a slight limp. Temperature 37.3°C. Heart rate 94 bpm. Blood pressure 104/68 mmHg. Breathing rate 22/min. Oxygen saturation 99%.",
+          "examiner_text": "Generally well despite multi-system involvement. Mild limp. BP 104/68 — normal but must monitor serially given renal involvement.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_skin": {
+          "patient_text": "Skin: Symmetrical raised purplish spots on the outer surfaces of both legs and buttocks. Not going away with pressure. Most spots 2–8 mm. Some larger bruise-like areas.",
+          "examiner_text": "Symmetrical palpable purpura on extensor surfaces, lower limbs and buttocks. Non-blanching. Distribution and morphology are characteristic.",
+          "type": "exam",
+          "label": "Skin examination"
+        },
+        "exam_joints": {
+          "patient_text": "Joints: Both ankles and knees are swollen — warm and tender. Full movement preserved. Wrists: mildly tender.",
+          "examiner_text": "Bilateral ankle and knee arthritis — warm, tender, swollen. Full ROM preserved despite tenderness. No effusion.",
+          "type": "exam",
+          "label": "Joint examination"
+        },
+        "ix_urinalysis": {
+          "patient_text": "Urine dipstick:\n• Blood: 2+\n• Protein: 1+",
+          "examiner_text": "Haematuria 2+ and proteinuria 1+ — confirms renal involvement. Requires close monitoring — BP and renal function at each review.",
+          "type": "investigation",
+          "label": "Urinalysis"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 11.4 × 10⁹/L\n• Platelets: 340 × 10⁹/L\n• CRP: 44 mg/L",
+          "examiner_text": "Mild leucocytosis. Normal platelet count — important distinguishing feature from thrombocytopaenic purpura. Mildly elevated CRP.",
+          "type": "investigation",
+          "label": "FBC and CRP"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "sr_rash",
+          "sr_joints",
+          "sr_urine",
+          "ix_urinalysis"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "sr_abdomen",
+          "ix_fbc",
+          "exam_skin"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_pyloric_stenosis_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Oluwatobiloba Adeyemi",
+        "age": 0,
+        "sex": "Male",
+        "occupation": "Infant (5 weeks)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Projectile vomiting after every feed for 10 days",
+      "diagnosis": {
+        "primary": "Hypertrophic Pyloric Stenosis",
+        "keywords": [
+          "pyloric stenosis",
+          "hypertrophic pyloric stenosis",
+          "hps",
+          "projectile vomiting infant"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Pyloric Stenosis",
+          "color": "#B86A10",
+          "initial": 60
+        },
+        {
+          "name": "GORD",
+          "color": "#1A7A6E",
+          "initial": 20
+        },
+        {
+          "name": "Overfeeding",
+          "color": "#5B3F8A",
+          "initial": 10
+        },
+        {
+          "name": "Intestinal Malrotation",
+          "color": "#9B3535",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "proton pump inhibitor.*pyloric|ppi.*pyloric stenosis",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ PPIs treat GORD, not pyloric stenosis. The treatment for HPS is surgical pyloromyotomy. Deducted −10 pts."
+        },
+        {
+          "pattern": "formula change.*pyloric|switch.*milk.*pyloric",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Changing formula does not treat pyloric stenosis. Surgical correction is required. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He was feeding well for the first 3 weeks. Then 10 days ago the vomiting started — it's getting progressively worse. Now it happens after every single feed.",
+          "examiner_text": "Well period of 3 weeks followed by progressive vomiting onset at ~3–4 weeks of age. Classic timing. Now occurring after every feed.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The vomiting is very forceful — it shoots across the room, sometimes 1–2 feet. It's not dribbling — it's projected. The vomit looks like curdled milk — never green.",
+          "examiner_text": "Projectile vomiting — forceful, non-bilious. Non-bilious is essential: bilious vomiting would suggest obstruction distal to the ampulla. Projectile nature indicates gastric outlet obstruction.",
+          "type": "history",
+          "label": "Vomiting character"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) After he vomits he acts very hungry immediately — he roots and wants to feed again straight away. He's clearly not getting enough.",
+          "examiner_text": "Hunger immediately after vomiting — hallmark of pyloric obstruction. Hunger drive preserved; stomach empties by vomiting rather than passage.",
+          "type": "history",
+          "label": "Post-vomiting hunger"
+        },
+        "sr_weight": {
+          "patient_text": "(Mother) He was 3.5 kg at birth. He was 4.1 kg at the 2-week visit. But he hasn't gained since. He looks thinner to me now.",
+          "examiner_text": "Initial appropriate weight gain followed by weight faltering since vomiting onset. Likely weight loss from fluid and caloric deficit.",
+          "type": "history",
+          "label": "Weight"
+        },
+        "sr_stool": {
+          "patient_text": "(Mother) He's passing much less stool — used to pass stool after every feed, now just once a day. Small amounts.",
+          "examiner_text": "Reduced stool frequency — consistent with reduced gut transit from inadequate feed absorption.",
+          "type": "history",
+          "label": "Stool"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) My husband was treated for pyloric stenosis as a baby — he had surgery. We didn't know it could happen to our child.",
+          "examiner_text": "Positive family history — paternal pyloric stenosis. Condition has strong familial component.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Hungry-looking, alert. Weight 3.8 kg — below birth weight of 3.5 kg. Mild dehydration — sunken soft spot, dry lips. Mild yellowing.",
+          "examiner_text": "Weight 3.8 kg — below birth weight. Actual weight loss. Sunken fontanelle and dry lips — dehydration. Mild jaundice — unconjugated, associated with pyloric stenosis.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Flat. Visible wave-like movements from left to right across the upper stomach area after a feed. A firm, olive-shaped mass felt in the upper middle area of the abdomen during a test feed.",
+          "examiner_text": "Visible peristaltic waves left-to-right post-feed — gastric hyperperistalsis. Pyloric olive palpated in epigastrium/RUQ during test feed — a firm, smooth, mobile mass.",
+          "type": "exam",
+          "label": "Abdominal examination"
+        },
+        "ix_ultrasound": {
+          "patient_text": "Ultrasound of the stomach outlet:\n• Muscle wall thickness: 5 mm (normal <4 mm)\n• Outlet canal length: 20 mm (normal <16 mm)",
+          "examiner_text": "Pyloric muscle thickness 5 mm (>4 mm) and canal length 20 mm (>16 mm) — both above diagnostic thresholds. Confirms HPS. Surgical referral for Ramstedt's pyloromyotomy.",
+          "type": "investigation",
+          "label": "Pyloric ultrasound"
+        },
+        "ix_lft": {
+          "patient_text": "Electrolytes:\n• Sodium: 132 mmol/L\n• Potassium: 2.8 mmol/L\n• Chloride: 88 mmol/L\n• Bicarbonate: 32 mmol/L",
+          "examiner_text": "Low sodium, markedly low potassium, very low chloride, raised bicarbonate — the electrolyte disturbance from prolonged loss of gastric acid. Must be corrected before surgery can safely proceed.",
+          "type": "investigation",
+          "label": "Electrolytes"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "feeding_history",
+          "ix_ultrasound",
+          "ix_lft"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "fhx_general",
+          "exam_abdomen",
+          "sr_weight"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_rickets_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 480,
+      "hospital": "ABUTH Zaria",
+      "patient": {
+        "name": "Ibrahim Tanko",
+        "age": 2,
+        "sex": "Male",
+        "occupation": "Toddler",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Bowed legs noticed since the child started walking at 14 months",
+      "diagnosis": {
+        "primary": "Nutritional Rickets",
+        "keywords": [
+          "rickets",
+          "nutritional rickets",
+          "vitamin d deficiency rickets",
+          "calcium deficiency rickets"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Nutritional Rickets",
+          "color": "#B86A10",
+          "initial": 60
+        },
+        {
+          "name": "Physiological Bow Legs",
+          "color": "#1A7A6E",
+          "initial": 20
+        },
+        {
+          "name": "Hypophosphataemic Rickets",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Renal Osteodystrophy",
+          "color": "#9B3535",
+          "initial": 5
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "vitamin a.*rickets|give.*vitamin a.*bowed legs",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Rickets is caused by Vitamin D and/or calcium deficiency — not Vitamin A. Deducted −10 pts."
+        },
+        {
+          "pattern": "surgery.*bow.*leg.*without.*x.?ray|corrective.*surgery.*without.*investigation",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Surgical correction should only be considered after medical treatment and radiological assessment. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) His legs have been bowed since he started walking at 14 months. He walks with a waddling gait. They haven't gotten better — if anything slightly worse.",
+          "examiner_text": "Bow legs present from onset of walking at 14 months. Progressive — distinguishes from physiological genu varum (should resolve by 18–24 months). Waddling gait confirmed.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) He was breastfed for 12 months but without any vitamin supplements. Now he eats mostly pap and rice — little meat or fish. We don't give him milk or dairy products.",
+          "examiner_text": "Exclusive breastfeeding without vitamin D supplementation — breast milk alone is insufficient. Current diet: carbohydrate-based, minimal calcium and protein. No dairy.",
+          "type": "history",
+          "label": "Dietary history"
+        },
+        "sun_exposure": {
+          "patient_text": "(Mother) In our community, we keep babies indoors — we believe direct sunlight is harmful to babies. He's rarely outside. He's always fully covered.",
+          "examiner_text": "Severely restricted sun exposure — cultural practice. Eliminates cutaneous vitamin D synthesis — the primary source.",
+          "type": "history",
+          "label": "Sun exposure"
+        },
+        "sr_seizures": {
+          "patient_text": "(Mother) He had one seizure at 8 months — the doctor said it might have been caused by low calcium. He was given calcium treatment then.",
+          "examiner_text": "Hypocalcaemic seizure at 8 months — treated. Consistent with longstanding calcium/vitamin D deficiency predating the current presentation.",
+          "type": "history",
+          "label": "Previous seizure"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) He had a seizure at 8 months. No other illnesses. He started walking late — at 14 months. Speech is normal.",
+          "examiner_text": "Delayed walking (14 months). Prior hypocalcaemic seizure. Speech normal — cognitive development unaffected.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert, well-nourished. Height: 82 cm. Weight: 11.4 kg. Prominent forehead. Only 8 teeth (expected about 16 at 24 months).",
+          "examiner_text": "Height and weight within range. Frontal bossing — cranial bone remodelling. Delayed dental eruption.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_msk": {
+          "patient_text": "Bones and joints:\n• Legs bowed outward — gap of 8 cm between the knees\n• Lumpy nodular enlargement felt along the front of the chest at the rib junctions\n• Wrists wider than normal\n• A groove along the lower chest wall",
+          "examiner_text": "Genu varum — intercondylar distance 8 cm. Rachitic rosary — nodular costochondral enlargement. Metaphyseal widening at wrists. Harrison's sulcus. Classic skeletal changes of rickets.",
+          "type": "exam",
+          "label": "Skeletal examination"
+        },
+        "ix_xray": {
+          "patient_text": "Wrist X-ray:\n• Cupped and frayed appearance at the ends of the forearm bones\n• Wider gap at the growth plate\n• Bones look less dense than normal",
+          "examiner_text": "Cupping, fraying and splaying of distal metaphyses. Widened growth plate. Generalised osteopaenia. Classic radiological findings of nutritional rickets.",
+          "type": "investigation",
+          "label": "Wrist X-ray"
+        },
+        "ix_calcium": {
+          "patient_text": "Blood results:\n• Calcium: 1.8 mmol/L\n• Phosphate: 0.7 mmol/L\n• Alkaline phosphatase (ALP): 680 IU/L\n• Vitamin D level: 12 nmol/L\n• PTH: 186 pg/mL",
+          "examiner_text": "Hypocalcaemia. Hypophosphataemia. Markedly elevated ALP — osteoblastic activity. Severely deficient vitamin D (12 nmol/L). Elevated PTH — secondary hyperparathyroidism.",
+          "type": "investigation",
+          "label": "Calcium and vitamin D"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "feeding_history",
+          "sun_exposure",
+          "ix_calcium",
+          "exam_msk"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "sr_seizures",
+          "ix_xray",
+          "exam_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_rhd_001",
+      "discipline": "peds",
+      "difficulty": "hard",
+      "timeLimit": 600,
+      "hospital": "UCH Ibadan",
+      "patient": {
+        "name": "Taiwo Afolabi",
+        "age": 11,
+        "sex": "Female",
+        "occupation": "Primary school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Shortness of breath, joint pains and recent sore throat — now with heart murmur",
+      "diagnosis": {
+        "primary": "Acute Rheumatic Fever",
+        "keywords": [
+          "acute rheumatic fever",
+          "arf",
+          "rheumatic fever",
+          "rheumatic carditis",
+          "jones criteria"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Acute Rheumatic Fever",
+          "color": "#9B3535",
+          "initial": 55
+        },
+        {
+          "name": "Juvenile Idiopathic Arthritis",
+          "color": "#5B3F8A",
+          "initial": 20
+        },
+        {
+          "name": "Viral Carditis",
+          "color": "#1A7A6E",
+          "initial": 15
+        },
+        {
+          "name": "Infective Endocarditis",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "nsaid.*carditis.*arf|ibuprofen.*rheumatic.*carditis",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ In ARF with significant carditis, aspirin (>12 years) or naproxen preferred — not ibuprofen as first choice. Deducted −15 pts."
+        },
+        {
+          "pattern": "stop.*penicillin.*arf|no.*secondary prophylaxis",
+          "flags": "i",
+          "penalty": 20,
+          "explanation": "⛔ Secondary prophylaxis with monthly benzathine penicillin is MANDATORY — prevents recurrence and progressive valve damage. Minimum 10 years or age 25. Deducted −20 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "I had a very sore throat about 3 weeks ago — I took some tablets from the pharmacy but didn't finish the course. About a week later my joints started to hurt.",
+          "examiner_text": "Pharyngitis 3 weeks ago — not fully treated. Joint symptoms 1 week after throat infection — latent period consistent with post-streptococcal immune response.",
+          "type": "history",
+          "label": "Preceding sore throat"
+        },
+        "sr_joints": {
+          "patient_text": "My knees, ankles and wrists have been very painful and swollen — it moves from joint to joint. The right knee was worst on Monday, now the left ankle is worst today. It's very painful, warm and swollen.",
+          "examiner_text": "Migratory polyarthritis — joints affected sequentially. Knees, ankles and wrists involved. Flitting pattern — each joint hot, tender and swollen.",
+          "type": "history",
+          "label": "Joint symptoms"
+        },
+        "sr_chest": {
+          "patient_text": "I've been getting short of breath when I climb stairs. Sometimes I feel my heart beating very fast at rest. I feel tightness in the chest sometimes.",
+          "examiner_text": "Exertional dyspnoea, palpitations at rest, and chest tightness — symptoms of cardiac involvement. Requires urgent cardiovascular examination.",
+          "type": "history",
+          "label": "Cardiac symptoms"
+        },
+        "sr_skin": {
+          "patient_text": "My mum noticed a pink ring-shaped rash on my body last week — faint, not itchy. It seems to have faded now.",
+          "examiner_text": "Annular erythematous rash — faint, evanescent, non-pruritic. Transient nature is characteristic. History is relevant even though no longer present.",
+          "type": "history",
+          "label": "Rash"
+        },
+        "sr_neuro": {
+          "patient_text": "My teacher said I've been making sudden jerky movements I don't seem to control — especially my hands. My handwriting has gotten worse.",
+          "examiner_text": "Involuntary purposeless movements — teacher-noticed. Deteriorating handwriting. Consistent with an involuntary movement disorder — a recognised manifestation of this condition.",
+          "type": "history",
+          "label": "Involuntary movements"
+        },
+        "pmh_general": {
+          "patient_text": "I had a similar sore throat 6 months ago. No previous diagnosis of a heart condition.",
+          "examiner_text": "Recurrent streptococcal pharyngitis — second episode in 6 months. No prior cardiac diagnosis.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Ill-looking with fever. Temperature 38.8°C. Heart rate 118 bpm. Blood pressure 100/64 mmHg. Breathing rate 24/min. Involuntary purposeless hand movements observed. Faint ring-shaped reddish rash on trunk.",
+          "examiner_text": "Febrile, tachycardic. Chorea — involuntary purposeless movements of hands confirmed. Erythema marginatum visible on trunk. Both are recognised clinical features.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_cardiovascular": {
+          "patient_text": "Heart examination:\n• Apex beat displaced to the side\n• Three heart sounds — normal first and second plus an extra third\n• Pansystolic murmur at the apex — loud, heard in the armpit\n• A mid-diastolic murmur at the apex",
+          "examiner_text": "Displaced apex beat — cardiomegaly. S3 gallop. Pansystolic murmur grade 3/6 radiating to axilla — mitral regurgitation. Mid-diastolic murmur — mitral valvulitis. Two murmurs and displaced apex = significant carditis.",
+          "type": "exam",
+          "label": "Cardiovascular examination"
+        },
+        "ix_echo": {
+          "patient_text": "Echocardiogram:\n• Mitral valve: leaking — moderate\n• Aortic valve: very small leak\n• Left-sided chambers slightly enlarged\n• Small amount of fluid around the heart",
+          "examiner_text": "Moderate mitral regurgitation — evolving valve disease. Minimal aortic regurgitation. LA and LV dilatation — volume overload. Trivial pericardial effusion. Echo confirms carditis.",
+          "type": "investigation",
+          "label": "Echocardiogram"
+        },
+        "ix_culture": {
+          "patient_text": "Throat swab: Group A Streptococcus grown\nASO titre: 640 IU/mL\nCRP: 112 mg/L. ESR: 78 mm/hr\nECG: PR interval prolonged at 0.24 seconds",
+          "examiner_text": "GAS from throat — confirms ongoing carriage. ASO 640 IU/mL — markedly elevated, confirms recent streptococcal infection. ECG: first-degree AV block (PR 0.24 s) — minor criterion.",
+          "type": "investigation",
+          "label": "Strep evidence and bloods"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_onset",
+          "sr_joints",
+          "exam_cardiovascular",
+          "ix_echo"
+        ],
+        "shouldAsk": [
+          "sr_chest",
+          "sr_neuro",
+          "ix_culture",
+          "sr_skin"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_worm_infestation_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 420,
+      "hospital": "PHC Ogun",
+      "patient": {
+        "name": "Blessing Adeola",
+        "age": 5,
+        "sex": "Female",
+        "occupation": "Nursery school",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Perianal itching at night, abdominal pain and poor sleep for 3 weeks",
+      "diagnosis": {
+        "primary": "Worm Infestation (Threadworm/Enterobiasis)",
+        "keywords": [
+          "threadworm",
+          "pinworm",
+          "enterobiasis",
+          "worm infestation",
+          "oxyuriasis"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Threadworm (Enterobiasis)",
+          "color": "#1A7A6E",
+          "initial": 55
+        },
+        {
+          "name": "Ascariasis",
+          "color": "#B86A10",
+          "initial": 20
+        },
+        {
+          "name": "Hookworm",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Perianal Dermatitis",
+          "color": "#9B3535",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "mebendazole.*under.*1|mebendazole.*infant|deworm.*under.*1 year",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Mebendazole is not recommended for children under 1 year. This child is 5 years — appropriate here. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) About 3 weeks ago she started complaining that her bottom itches at night. She can't sleep well. She scratches herself and is irritable in the mornings.",
+          "examiner_text": "Three-week history. Nocturnal perianal pruritus — itching disrupting sleep. Secondary irritability from sleep deprivation.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) The itching is specifically at night — during the day she seems fine. She's also had crampy tummy ache around the belly button. Her appetite has reduced.",
+          "examiner_text": "Exclusively nocturnal pruritus — diagnostically significant timing. Periumbilical colicky pain and reduced appetite — consistent with intestinal infestation.",
+          "type": "history",
+          "label": "Symptoms"
+        },
+        "sr_worms": {
+          "patient_text": "(Mother) Yes — I saw tiny white worms on her bottom at night when I checked. They were very small, thin and white — moving.",
+          "examiner_text": "Worms directly observed by mother — small, white, thread-like, motile. Direct visualisation of causative organism at perianal area.",
+          "type": "history",
+          "label": "Worms seen"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) She goes to nursery school. She plays in the compound — often with soil. Her hygiene isn't always perfect — she doesn't always wash hands before eating.",
+          "examiner_text": "School attendance — communal setting. Soil play and inadequate hand washing — faeco-oral transmission route.",
+          "type": "history",
+          "label": "Hygiene and exposure"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) Her younger brother (age 3) has also been scratching his bottom recently. Father hasn't complained.",
+          "examiner_text": "Symptomatic household contact — sibling also affected. Household transmission is common — treat all household members.",
+          "type": "history",
+          "label": "Household contacts"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) She's been healthy. No hospital admissions. Fully vaccinated. She was dewormed once at age 2.",
+          "examiner_text": "Prior deworming at age 2 — now 3 years ago. Reinfection common. No chronic illness.",
+          "type": "history",
+          "label": "Past medical history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Well, alert, cooperative. Normal vital signs. Temperature 36.8°C. Slightly pale. No yellowing. Weight 18 kg.",
+          "examiner_text": "Generally well. Mild pallor — consistent with mild anaemia. No jaundice. Weight appropriate.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_abdomen": {
+          "patient_text": "Abdomen: Soft. Mild tenderness around the belly button. No organ enlargement. Bowel sounds normal.\nPerianal area: Redness and scratch marks around the anus.",
+          "examiner_text": "Periumbilical tenderness — intestinal irritation. No organomegaly. Perianal erythema and excoriation — direct evidence of scratching.",
+          "type": "exam",
+          "label": "Abdominal and perianal examination"
+        },
+        "ix_tape_test": {
+          "patient_text": "Sellotape test (applied to the anal area at night or first thing in the morning): Worm eggs seen under the microscope.\nStool examination: Worm eggs confirmed.",
+          "examiner_text": "Tape test positive — Enterobius vermicularis eggs on microscopy. Stool O&P also positive. Both confirm the diagnosis.",
+          "type": "investigation",
+          "label": "Tape test and stool examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 10.8 g/dL\n• Eosinophils: slightly raised",
+          "examiner_text": "Mild anaemia — consistent with intestinal infestation. Mild eosinophilia — typical inflammatory response to helminth infection.",
+          "type": "investigation",
+          "label": "FBC"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_character",
+          "sr_worms",
+          "shx_general",
+          "fhx_general"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "ix_tape_test",
+          "exam_abdomen",
+          "pmh_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_neonatal_hypoglycaemia_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 480,
+      "hospital": "LUTH Lagos",
+      "patient": {
+        "name": "Baby Adaeze",
+        "age": 0,
+        "sex": "Female",
+        "occupation": "Neonate (Day 1)",
+        "avatar": "🍼"
+      },
+      "presentingComplaint": "Jitteriness and poor feeding in a macrosomic neonate born to a diabetic mother",
+      "diagnosis": {
+        "primary": "Neonatal Hypoglycaemia (IDM)",
+        "keywords": [
+          "neonatal hypoglycaemia",
+          "hypoglycemia neonate",
+          "infant diabetic mother",
+          "idm hypoglycaemia"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Neonatal Hypoglycaemia (IDM)",
+          "color": "#B86A10",
+          "initial": 60
+        },
+        {
+          "name": "Neonatal Seizure",
+          "color": "#9B3535",
+          "initial": 20
+        },
+        {
+          "name": "Neonatal Sepsis",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Hypocalcaemia",
+          "color": "#1A7A6E",
+          "initial": 5
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "insulin.*hypoglycaemia.*neonate|give.*insulin.*low sugar.*baby",
+          "flags": "i",
+          "penalty": 25,
+          "explanation": "⛔ NEVER give insulin to a hypoglycaemic neonate — fatal error. Treat with dextrose. Deducted −25 pts."
+        },
+        {
+          "pattern": "wait.*feed.*jittery.*neonate|observe.*without.*glucose.*check",
+          "flags": "i",
+          "penalty": 15,
+          "explanation": "⚠️ Jitteriness in a high-risk neonate requires immediate blood glucose measurement. Deducted −15 pts."
+        }
+      ],
+      "intentMap": {
+        "birth_history": {
+          "patient_text": "(Mother) She was born 2 hours ago by caesarean section at 38 weeks. Birth weight 4.6 kg — the doctor said she's large for her dates. APGAR was 7 and 9.",
+          "examiner_text": "Caesarean delivery at 38 weeks. BW 4.6 kg — macrosomic (>4 kg). APGAR 7 at 1 minute, 9 at 5 minutes. Macrosomia in context of maternal diabetes is a key risk factor.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "maternal_history": {
+          "patient_text": "(Mother) I have gestational diabetes — diagnosed at 28 weeks. My blood sugars were not well controlled despite diet changes. I was started on metformin at 32 weeks.",
+          "examiner_text": "GDM diagnosed at 28 weeks. Poorly controlled despite dietary measures — metformin added at 32 weeks. Suboptimal glycaemic control increases neonatal risks.",
+          "type": "history",
+          "label": "Maternal diabetes"
+        },
+        "hpc_character": {
+          "patient_text": "(Nurse) Baby has been jittery since about 90 minutes of age — fine tremor of hands and chin. She's been difficult to rouse for feeding. One episode of eye deviation was noticed.",
+          "examiner_text": "Jitteriness onset 90 minutes of age. Fine tremor hands and chin. Drowsiness — poor feeding. One episode of eye deviation — possible subtle seizure. Urgent glucose check required.",
+          "type": "history",
+          "label": "Jitteriness"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) We tried breastfeeding immediately after birth as instructed but she's too sleepy to latch. She hasn't fed properly yet.",
+          "examiner_text": "Early breastfeeding attempted — appropriate. Failure to latch due to drowsiness. No oral caloric intake since birth.",
+          "type": "history",
+          "label": "Feeding attempts"
+        },
+        "pmh_general": {
+          "patient_text": "(Mother) No previous pregnancy complications. This is my first child. No family history of diabetes.",
+          "examiner_text": "Primigravida. No prior obstetric complications. No family history of diabetes.",
+          "type": "history",
+          "label": "Obstetric history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Large baby (4.6 kg). Jittery — fine tremor of hands and chin. Ruddy, red complexion. Slightly low muscle tone. Temperature 36.5°C. Heart rate 164 bpm. Breathing rate 56/min. Oxygen saturation 97%.",
+          "examiner_text": "Macrosomic. Jitteriness — fine tremor. Plethoric complexion — polycythaemia. Mild hypotonia. Tachycardia and tachypnoea — stress response.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological: Tremor stops when the limb is held still. Weak Moro reflex. Poor suck reflex. Slightly low tone. No obvious weakness on one side.",
+          "examiner_text": "Jitteriness ceases with passive limb restraint — key feature differentiating from seizure. Weak Moro and poor suck — CNS depression from hypoglycaemia. No focal deficit.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "ix_glucose": {
+          "patient_text": "Bedside blood glucose: 1.6 mmol/L",
+          "examiner_text": "Symptomatic hypoglycaemia (glucose 1.6 mmol/L; treatment threshold <2.6 mmol/L). IV 10% dextrose 2 ml/kg bolus immediately, then continuous dextrose infusion. Recheck in 30 minutes.",
+          "type": "investigation",
+          "label": "Blood glucose"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• Haemoglobin: 22.4 g/dL\n• Haematocrit: 67%\n• White cells: 13.8 × 10⁹/L\nSerum calcium: 1.82 mmol/L",
+          "examiner_text": "Polycythaemia — Hb 22.4 g/dL, haematocrit 67% (>65% = polycythaemia). Increases blood viscosity. Normal WBC. Mild hypocalcaemia — another common complication in this context.",
+          "type": "investigation",
+          "label": "FBC and calcium"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "maternal_history",
+          "ix_glucose",
+          "hpc_character",
+          "exam_neuro"
+        ],
+        "shouldAsk": [
+          "birth_history",
+          "feeding_history",
+          "exam_general",
+          "ix_fbc"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_measles_001",
+      "discipline": "peds",
+      "difficulty": "easy",
+      "timeLimit": 480,
+      "hospital": "UITH Ilorin",
+      "patient": {
+        "name": "Adamu Yusuf",
+        "age": 3,
+        "sex": "Male",
+        "occupation": "Toddler",
+        "avatar": "👦"
+      },
+      "presentingComplaint": "Rash covering the whole body, high fever and red eyes for 4 days",
+      "diagnosis": {
+        "primary": "Measles",
+        "keywords": [
+          "measles",
+          "rubeola",
+          "morbilli",
+          "measles virus"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Measles",
+          "color": "#9B3535",
+          "initial": 60
+        },
+        {
+          "name": "Rubella",
+          "color": "#5B3F8A",
+          "initial": 15
+        },
+        {
+          "name": "Roseola Infantum",
+          "color": "#1A7A6E",
+          "initial": 15
+        },
+        {
+          "name": "Drug Rash",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "antibiotic.*measles.*without.*complication|amoxicillin.*uncomplicated measles",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Antibiotics not indicated for uncomplicated measles — it is viral. Only for confirmed secondary bacterial complications. Deducted −10 pts."
+        },
+        {
+          "pattern": "antiviral.*measles|aciclovir.*measles",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ There is no specific antiviral for measles. Treatment is supportive. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "hpc_onset": {
+          "patient_text": "(Mother) He had high fever, runny nose and red eyes for 3 days. On day 4 the rash appeared — it started on his face and spread downward to his body, arms and legs.",
+          "examiner_text": "Three-day febrile prodrome with catarrhal symptoms preceding rash on day 4. Rash spreading in a downward pattern from face.",
+          "type": "history",
+          "label": "Onset"
+        },
+        "sr_rash": {
+          "patient_text": "(Mother) The rash is red — flat and bumpy spots that are joining together. Started behind his ears and on the face, then spread down. His whole body is covered now.",
+          "examiner_text": "Maculopapular rash with coalescence. Origin retroauricular and facial, spreading cephalocaudally. Now generalised. Blanches on pressure.",
+          "type": "history",
+          "label": "Rash description"
+        },
+        "sr_fever": {
+          "patient_text": "(Mother) Very high fever — 40°C. It actually got worse when the rash appeared. He's very miserable.",
+          "examiner_text": "High fever (40°C) worsening at time of rash onset — characteristic pattern.",
+          "type": "history",
+          "label": "Fever"
+        },
+        "immunisation": {
+          "patient_text": "(Mother) He missed his 9-month measles vaccine. We were away and then forgot. He never got it.",
+          "examiner_text": "Measles vaccine not received at 9 months — missed and not caught up. Unvaccinated status is critical history in this presentation.",
+          "type": "history",
+          "label": "Immunisation"
+        },
+        "sr_eyes": {
+          "patient_text": "(Mother) Yes — both eyes are very red and discharging — yellow crusting every morning. They seem sensitive to light. I keep wiping them.",
+          "examiner_text": "Bilateral conjunctivitis with mucopurulent discharge and crusting. Photophobia. Part of the prodrome, persisting into the exanthem phase.",
+          "type": "history",
+          "label": "Eye symptoms"
+        },
+        "hpc_character": {
+          "patient_text": "(Mother) Runny nose, barking cough and very red eyes started first — 3 days before the rash. The cough is worsening.",
+          "examiner_text": "Classic prodromal triad: coryza, cough (barking), conjunctivitis — all preceding rash by 3 days. Cough worsening — monitor for respiratory complications.",
+          "type": "history",
+          "label": "Prodromal symptoms"
+        },
+        "shx_general": {
+          "patient_text": "(Mother) His classmate at nursery school had a similar rash last week. We live in a densely populated area.",
+          "examiner_text": "Contact with symptomatic child at nursery school. Dense population — risk of outbreak.",
+          "type": "history",
+          "label": "Contact history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Ill, miserable, crying. Temperature 40.1°C. Heart rate 138 bpm. Breathing rate 42/min. Oxygen saturation 95%. Both eyes red with yellow discharge. Small white spots visible on the inner cheeks.",
+          "examiner_text": "Febrile, distressed. SpO₂ 95% — borderline. Bilateral conjunctival injection with mucopurulent discharge. White spots on buccal mucosa — Koplik's spots. Pathognomonic and should be actively sought.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_skin": {
+          "patient_text": "Skin: Red flat and raised spots covering the face, trunk and limbs — joining together on the face. Spots disappear when pressed. Spreading from head downward.",
+          "examiner_text": "Maculopapular blanching rash. Coalescing lesions on face. Cephalocaudal spread confirmed. Day 4 of rash — now generalised.",
+          "type": "exam",
+          "label": "Skin examination"
+        },
+        "ix_fbc": {
+          "patient_text": "Full Blood Count:\n• White cells: 3.8 × 10⁹/L\n• Lymphocytes: 1.2 × 10⁹/L",
+          "examiner_text": "Leucopaenia with lymphopaenia — characteristic of viral measles infection. Severe immunosuppression follows measles — secondary bacterial infections are the major cause of mortality.",
+          "type": "investigation",
+          "label": "FBC"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "hpc_onset",
+          "immunisation",
+          "exam_general",
+          "sr_rash"
+        ],
+        "shouldAsk": [
+          "hpc_character",
+          "sr_eyes",
+          "shx_general",
+          "ix_fbc"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    },
+    {
+      "caseId": "case_peds_cerebral_palsy_001",
+      "discipline": "peds",
+      "difficulty": "intermediate",
+      "timeLimit": 540,
+      "hospital": "UNIBEN Benin",
+      "patient": {
+        "name": "Chidinma Okonkwo",
+        "age": 2,
+        "sex": "Female",
+        "occupation": "Toddler",
+        "avatar": "👧"
+      },
+      "presentingComplaint": "Delayed walking, stiff legs and feeding difficulties since infancy",
+      "diagnosis": {
+        "primary": "Cerebral Palsy (Spastic Diplegia)",
+        "keywords": [
+          "cerebral palsy",
+          "spastic diplegia",
+          "cp",
+          "spastic cerebral palsy",
+          "motor delay"
+        ]
+      },
+      "differentials": [
+        {
+          "name": "Spastic Diplegia (CP)",
+          "color": "#5B3F8A",
+          "initial": 55
+        },
+        {
+          "name": "Hypotonic CP",
+          "color": "#1A7A6E",
+          "initial": 15
+        },
+        {
+          "name": "Spinal Muscular Atrophy",
+          "color": "#9B3535",
+          "initial": 20
+        },
+        {
+          "name": "Global Developmental Delay",
+          "color": "#B86A10",
+          "initial": 10
+        }
+      ],
+      "trapActions": [
+        {
+          "pattern": "mri.*contraindicated.*cp|no need.*brain scan.*cp",
+          "flags": "i",
+          "penalty": 10,
+          "explanation": "⚠️ Brain MRI is indicated in all children with CP to define aetiology and guide prognosis. Deducted −10 pts."
+        }
+      ],
+      "intentMap": {
+        "birth_history": {
+          "patient_text": "(Mother) She was born at 30 weeks — premature. She spent 6 weeks in the NICU. She needed a breathing machine for 2 weeks. She had a brain scan in hospital that showed some changes.",
+          "examiner_text": "Extreme prematurity (30 weeks). NICU 6 weeks. Mechanical ventilation 2 weeks. Neonatal cranial imaging showed white matter changes.",
+          "type": "history",
+          "label": "Birth history"
+        },
+        "hpc_onset": {
+          "patient_text": "(Mother) From about 4 months I noticed she held her legs very stiff when I dressed her. She couldn't sit by 9 months. She's 2 now and still not walking. She bottom-shuffles.",
+          "examiner_text": "Lower limb hypertonia from 4 months. Sitting not achieved by 9 months — delayed. Not walking at 2 years — significantly delayed. Bottom-shuffling as alternative mobility.",
+          "type": "history",
+          "label": "Motor development"
+        },
+        "feeding_history": {
+          "patient_text": "(Mother) She has always had trouble feeding — poor suck, gagging on solids. She drools a lot. Feeding takes over an hour each time.",
+          "examiner_text": "Oromotor dysfunction from infancy — poor suck, gagging, excessive drooling. Feeding >1 hour. Indicates involvement beyond lower limbs.",
+          "type": "history",
+          "label": "Feeding difficulties"
+        },
+        "dev_history": {
+          "patient_text": "(Mother) Smiling: at 3 months (late). Sitting: not yet achieved. Standing with support: just started. No walking. Speech: about 5 words — mostly babbles. She understands what I say.",
+          "examiner_text": "Social smile delayed (3 months vs expected 6–8 weeks). Sitting not achieved at 2 years. Fine motor and language mildly delayed. Comprehension preserved.",
+          "type": "history",
+          "label": "Developmental milestones"
+        },
+        "sr_seizures": {
+          "patient_text": "(Mother) She had 3 seizures between 6 and 12 months — the neurologist started her on sodium valproate. She's been seizure-free for 8 months now.",
+          "examiner_text": "Seizures in first year of life — 3 episodes. Controlled on sodium valproate. Seizure-free 8 months. Epilepsy is a recognised comorbidity of cerebral palsy.",
+          "type": "history",
+          "label": "Seizure history"
+        },
+        "fhx_general": {
+          "patient_text": "(Mother) No family history of neurological conditions. I'm 28. The pregnancy was normal — the premature labour was spontaneous.",
+          "examiner_text": "No family history of neurological or neuromuscular disease. Spontaneous preterm labour. Maternal age 28 — not a risk factor.",
+          "type": "history",
+          "label": "Family history"
+        },
+        "exam_general": {
+          "patient_text": "On examination: Alert, interactive, friendly. Smaller than expected for age. Head circumference: 44 cm — below the normal range. Cannot stand independently.",
+          "examiner_text": "Alert and socially engaged — encouraging cognitive function. Below 3rd centile for head circumference — microcephaly. Unable to stand independently at 2 years.",
+          "type": "exam",
+          "label": "General examination"
+        },
+        "exam_neuro": {
+          "patient_text": "Neurological examination:\n• Legs: stiff and resistant to movement — stiffness releases suddenly when pushed further\n• Reflexes in legs: very brisk, with repetitive twitching at the ankles\n• Toes: pointing upward when sole is scratched\n• Arms: mildly stiff\n• Scissoring of legs when held upright\n• Cranial nerves: normal",
+          "examiner_text": "Bilateral lower limb spasticity with clasp-knife quality. Brisk reflexes and sustained ankle clonus. Extensor plantars bilaterally. Mild upper limb hypertonicity. Scissoring gait when supported — typical of spastic diplegia. Upper motor neurone pattern.",
+          "type": "exam",
+          "label": "Neurological examination"
+        },
+        "ix_mri": {
+          "patient_text": "MRI Brain:\n• White matter loss around the fluid spaces deep in the brain\n• Cystic changes in the white matter on both sides\n• The fluid spaces in the brain look slightly enlarged",
+          "examiner_text": "Periventricular leukomalacia (PVL) — cystic changes in bilateral periventricular white matter. Mild ventriculomegaly. PVL is the most common MRI finding in premature infants with spastic diplegia.",
+          "type": "investigation",
+          "label": "MRI brain"
+        }
+      },
+      "scoringMap": {
+        "mustAsk": [
+          "birth_history",
+          "dev_history",
+          "exam_neuro",
+          "ix_mri"
+        ],
+        "shouldAsk": [
+          "hpc_onset",
+          "feeding_history",
+          "sr_seizures",
+          "exam_general"
+        ],
+        "pointsBase": 5,
+        "pointsMust": 15
+      }
+    }
+  ]
+}
