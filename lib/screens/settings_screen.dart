@@ -122,7 +122,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextField(
             controller: _workerCtrl,
             decoration: const InputDecoration(
-
+              labelText: 'Cloudflare Worker URL',
+              hintText: 'https://bigclerk.<subdomain>.workers.dev',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.url,
+          ),
+          const SizedBox(height: 12),
           SwitchListTile(
             contentPadding: EdgeInsets.zero,
             title: const Text('Prefer Worker /chat when online'),
@@ -131,12 +137,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             value: _preferOnline,
             onChanged: (v) => setState(() => _preferOnline = v),
-          ),
-              labelText: 'Cloudflare Worker URL',
-              hintText: 'https://bigclerk.<subdomain>.workers.dev',
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.url,
           ),
           const SizedBox(height: 12),
           TextField(
