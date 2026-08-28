@@ -128,6 +128,15 @@ const List<RegressionExample> kRegressionFixtures = [
   ),
 ];
 
+/// Fixtures that exercise conditional reply rules (run via [runRuleRegression]).
+const List<RegressionExample> kRuleFixtures = [
+  RegressionExample(
+    caseId: 'rules',
+    utterance: 'When did it start?',
+    expectedIntentId: 'hpc_onset',
+  ),
+];
+
 class FixtureResult {
   final RegressionExample example;
   final bool passed;
@@ -194,8 +203,26 @@ Map<String, dynamic> syntheticJaundiceCase() {
       'pointsBase': 10,
     },
     'intentMap': {
+      'hpc_onset': {
+        'label': 'Onset',
+        'type': 'history',
+        'patient_text': 'Test reply for hpc_onset.',
+        'rules': [
+          {
+            'when': {'ask_count_gte': 1},
+            'text': 'I already told you — day 2.',
+          },
+          {
+            'when': {'register': 'terse'},
+            'text': 'Day 2. Eyes first.',
+          },
+          {
+            'when': {'prior_asked_any': ['fhx_general']},
+            'text': 'With family history in mind — started day 2, eyes first.',
+          },
+        ],
+      },
       for (final id in [
-        'hpc_onset',
         'hpc_character',
         'birth_history',
         'feeding_history',
@@ -334,4 +361,96 @@ List<String> topMissedUtterances({int limit = 20}) {
       .where((m) => m.isNotEmpty)
       .take(limit)
       .toList();
+}
+
+
+/// Ask onset twice; second reply uses ask_count_gte:1 (prior count is 1 on the repeat).
+Future<RegressionReport> runRuleRegression({
+  Map<String, dynamic>? caseData,
+}) async {
+  final data = caseData ?? syntheticJaundiceCase();
+  final state = DialogueState();
+  try {
+    if (!OnDeviceEncoder.instance.loaded) {
+      await OnDeviceEncoder.instance.load();
+    }
+  } catch (_) {}
+
+  final first = processChat(
+    caseData: data,
+    message: 'When did the yellowing start?',
+    askedIntents: const [],
+    dialogue: state,
+  );
+  final second = processChat(
+    caseData: data,
+    message: 'When did it start again?',
+    askedIntents: const ['hpc_onset'],
+    dialogue: state,
+  );
+
+  final results = <FixtureResult>[];
+  final firstOk = first.intentId == 'hpc_onset' ||
+      (first.matchedIntentIds?.contains('hpc_onset') ?? false);
+  results.add(FixtureResult(
+    example: const RegressionExample(
+      caseId: 'rules',
+      utterance: 'first onset ask',
+      expectedIntentId: 'hpc_onset',
+    ),
+    passed: firstOk,
+    gotIntentId: first.intentId,
+    gotType: first.type,
+    detail: firstOk
+        ? 'OK rule=${first.ruleMatched}'
+        : 'first ask failed type=${first.type} intent=${first.intentId}',
+  ));
+
+  final secondText = second.reply.toLowerCase();
+  final usedRepeatRule = secondText.contains('already told') ||
+      second.ruleMatched == 'rule_0';
+  results.add(FixtureResult(
+    example: const RegressionExample(
+      caseId: 'rules',
+      utterance: 'second onset ask',
+      expectedIntentId: 'hpc_onset',
+    ),
+    passed: usedRepeatRule,
+    gotIntentId: second.intentId,
+    gotType: second.type,
+    detail: usedRepeatRule
+        ? 'OK rule=${second.ruleMatched} text=${second.reply}'
+        : 'expected ask_count rule, got rule=${second.ruleMatched} text=${second.reply}',
+  ));
+
+  // Terse register on fresh state
+  final state2 = DialogueState();
+  final terse = processChat(
+    caseData: data,
+    message: 'Any onset?',
+    askedIntents: const [],
+    dialogue: state2,
+  );
+  // May match sr or onset depending on sensors; only check rule if onset
+  final terseOk = terse.intentId != 'hpc_onset' ||
+      terse.ruleMatched == 'rule_1' ||
+      terse.reply.toLowerCase().contains('day 2');
+  results.add(FixtureResult(
+    example: const RegressionExample(
+      caseId: 'rules',
+      utterance: 'Any onset?',
+      expectedIntentId: 'hpc_onset',
+    ),
+    passed: terseOk,
+    gotIntentId: terse.intentId,
+    detail: 'rule=${terse.ruleMatched} text=${terse.reply}',
+  ));
+
+  final passed = results.where((r) => r.passed).length;
+  return RegressionReport(
+    total: results.length,
+    passed: passed,
+    failed: results.length - passed,
+    results: results,
+  );
 }

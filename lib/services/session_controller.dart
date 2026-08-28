@@ -9,6 +9,7 @@ import 'app_config.dart';
 import 'connectivity_helper.dart';
 import 'supabase_api.dart';
 import 'worker_api.dart';
+import 'integration_hub.dart';
 
 class SessionController extends ChangeNotifier {
   CaseModel? caseData;
@@ -22,6 +23,8 @@ class SessionController extends ChangeNotifier {
   DateTime? startedAt;
 
   EngineSource lastEngineSource = EngineSource.offline;
+  HubSource? lastHubSource;
+  bool lastQueued = false;
   String? lastError;
 
   final WorkerApi _worker = WorkerApi();
@@ -48,55 +51,49 @@ class SessionController extends ChangeNotifier {
   }
 
   Future<void> sendMessage(String text) async {
-    if (caseData == null || sessionEnded || text.trim().isEmpty || isSending) {
-      return;
-    }
-
+    if (caseData == null || text.trim().isEmpty || isSending) return;
     isSending = true;
     lastError = null;
-    messages.add(ChatMessage(role: 'student', content: text.trim()));
+    lastQueued = false;
     notifyListeners();
 
+    messages.add(ChatMessage(role: 'student', content: text.trim()));
     final history = messages
-        .where((m) => m.role == 'patient' || m.role == 'student')
-        .map((m) => m.toHistoryMap())
+        .map((m) => {'role': m.role, 'content': m.content})
         .toList();
 
-    ChatResult result;
+    final hub = IntegrationHub();
     try {
-      final source = await ConnectivityHelper.instance.resolveSource();
-      lastEngineSource = source;
-
-      if (source == EngineSource.worker) {
-        result = await _chatViaWorker(text, history);
-        // Keep local dialogue state roughly in sync for offline continuity
-        if (result.intentId != null &&
-            result.type != 'penalty' &&
-            result.type != 'clarification') {
-          dialogue.setTopic(result.intentId!);
-        }
-      } else {
-        result = processChat(
-          caseData: caseData!.raw,
-          message: text,
-          conversationHistory: history,
-          askedIntents: List.from(askedIntents),
-          dialogue: dialogue,
-        );
-      }
-    } catch (e) {
-      lastEngineSource = EngineSource.offline;
-      lastError = e.toString();
-      result = processChat(
+      final turn = await hub.handleTurn(
         caseData: caseData!.raw,
-        message: text,
+        caseId: caseData!.caseId,
+        message: text.trim(),
         conversationHistory: history,
         askedIntents: List.from(askedIntents),
         dialogue: dialogue,
       );
+      lastHubSource = turn.source;
+      lastQueued = turn.queued;
+      lastEngineSource = switch (turn.source) {
+        HubSource.workerChat => EngineSource.worker,
+        HubSource.planReplyBank => EngineSource.worker,
+        HubSource.queuedMiss => EngineSource.worker,
+        _ => EngineSource.offline,
+      };
+      _applyResult(turn.result);
+    } catch (e) {
+      lastError = e.toString();
+      lastEngineSource = EngineSource.offline;
+      final result = processChat(
+        caseData: caseData!.raw,
+        message: text.trim(),
+        conversationHistory: history,
+        askedIntents: List.from(askedIntents),
+        dialogue: dialogue,
+      );
+      _applyResult(result);
     }
 
-    _applyResult(result);
     isSending = false;
     notifyListeners();
   }
@@ -197,35 +194,15 @@ class SessionController extends ChangeNotifier {
         ? 0
         : DateTime.now().difference(startedAt!).inSeconds;
 
-    final results = <String, dynamic>{};
-
-    try {
-      final w = await _worker.submitScore(
-        caseId: caseData!.caseId,
-        score: totalScore,
-        penalties: penalties,
-        discipline: caseData!.discipline,
-        timeTaken: elapsed,
-        studentName: AppConfig.instance.studentName,
-      );
-      results['worker'] = w;
-    } catch (e) {
-      results['worker_error'] = e.toString();
-    }
-
-    try {
-      final ok = await _supabase.insertScore(
-        caseId: caseData!.caseId,
-        score: totalScore,
-        penalties: penalties,
-        discipline: caseData!.discipline,
-        timeTaken: elapsed,
-        studentName: AppConfig.instance.studentName,
-      );
-      results['supabase'] = ok;
-    } catch (e) {
-      results['supabase_error'] = e.toString();
-    }
+    final hub = IntegrationHub(worker: _worker, supabase: _supabase);
+    final results = await hub.submitScoreEnd(
+      caseId: caseData!.caseId,
+      score: totalScore,
+      penalties: penalties,
+      discipline: caseData!.discipline,
+      timeTaken: elapsed,
+      studentName: AppConfig.instance.studentName,
+    );
 
     // Flush miss log learning payload when online
     try {

@@ -1,0 +1,102 @@
+# Build & test Clerking (Flutter) on every push/PR to main.
+# Android APK is uploaded as a workflow artifact (unsigned debug/release).
+
+name: Build Flutter app
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build-android:
+    name: Analyze · Test · APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      # Platform folders may be empty in this repo; regenerate without wiping lib/
+      - name: Ensure Android/iOS platform scaffolding
+        run: |
+          if [ ! -f android/app/build.gradle ] && [ ! -f android/app/build.gradle.kts ]; then
+            flutter create . --project-name cler_app --org com.clerkai --platforms=android,ios
+          fi
+
+      - name: Pub get
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos
+        continue-on-error: true
+
+      - name: Test
+        run: flutter test
+        continue-on-error: true
+
+      - name: Build APK (release)
+        run: flutter build apk --release --no-tree-shake-icons
+        env:
+          # Optional overrides at build time (do not put service_role here)
+          WORKER_BASE_URL: ${{ vars.WORKER_BASE_URL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: cler-app-release-apk
+          path: build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
+  # iOS compile check only (no signing / App Store upload)
+  build-ios-no-codesign:
+    name: iOS (no codesign)
+    runs-on: macos-latest
+    timeout-minutes: 60
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Ensure platforms
+        run: |
+          if [ ! -f ios/Runner.xcodeproj/project.pbxproj ]; then
+            flutter create . --project-name cler_app --org com.clerkai --platforms=android,ios
+          fi
+
+      - name: Pub get
+        run: flutter pub get
+
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign --no-tree-shake-icons

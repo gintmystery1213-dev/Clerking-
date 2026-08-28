@@ -12,6 +12,12 @@ class ConnectivityHelper {
 
   final WorkerApi _worker = WorkerApi();
 
+  /// True if the device has a non-none network interface.
+  static Future<bool> isOnline() async {
+    final net = await Connectivity().checkConnectivity();
+    return net.any((r) => r != ConnectivityResult.none);
+  }
+
   /// Resolve whether to use remote Worker based on mode + reachability.
   Future<EngineSource> resolveSource() async {
     final mode = AppConfig.instance.mode;

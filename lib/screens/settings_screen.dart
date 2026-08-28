@@ -20,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _keyCtrl = TextEditingController();
   final _nameCtrl = TextEditingController();
   String _mode = 'auto';
+  bool _preferOnline = false;
   String _status = '';
   bool _busy = false;
 
@@ -32,6 +33,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _keyCtrl.text = c.supabaseAnonKey;
     _nameCtrl.text = c.studentName;
     _mode = c.mode;
+    _preferOnline = c.preferOnlineEngine;
   }
 
   @override
@@ -50,6 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     c.supabaseAnonKey = _keyCtrl.text.trim();
     c.studentName = _nameCtrl.text.trim().isEmpty ? 'Anonymous' : _nameCtrl.text.trim();
     c.mode = _mode;
+    c.preferOnlineEngine = _preferOnline;
     await c.save();
     CaseRepository.instance.clearCache();
     if (mounted) {
@@ -119,6 +122,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextField(
             controller: _workerCtrl,
             decoration: const InputDecoration(
+
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text('Prefer Worker /chat when online'),
+            subtitle: const Text(
+              'Off = local engine first (recommended). On = remote /chat first.',
+            ),
+            value: _preferOnline,
+            onChanged: (v) => setState(() => _preferOnline = v),
+          ),
               labelText: 'Cloudflare Worker URL',
               hintText: 'https://bigclerk.<subdomain>.workers.dev',
               border: OutlineInputBorder(),

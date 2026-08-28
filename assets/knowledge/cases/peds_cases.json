@@ -65,7 +65,39 @@
           "patient_text": "(Mother) The yellow colour started on day 2 — we noticed the eyes first, then the skin by day 3.",
           "examiner_text": "Onset day 2–3 of life. Scleral icterus preceding skin involvement. Born at 39 weeks by SVD.",
           "type": "history",
-          "label": "Onset of yellowing"
+          "label": "Onset of yellowing",
+          "rules": [
+            {
+              "when": {
+                "prior_asked_any": [
+                  "fhx_general"
+                ],
+                "trust_gte": 0.5
+              },
+              "text": "(Mother) Since you're also asking about the family — yes, the yellowing started on day 2. Eyes first, then the skin. Could that run in families, doctor?"
+            },
+            {
+              "when": {
+                "prior_asked_any": [
+                  "hpc_character",
+                  "sr_fever"
+                ]
+              },
+              "text": "(Mother) Like I said — day 2. We saw the eyes first, then the skin by day 3."
+            },
+            {
+              "when": {
+                "ask_count_gte": 1
+              },
+              "text": "(Mother) I already told you, doctor — it started on day 2."
+            },
+            {
+              "when": {
+                "register": "terse"
+              },
+              "text": "(Mother) Day 2. Eyes first."
+            }
+          ]
         },
         "hpc_character": {
           "patient_text": "(Mother) The yellow colour started from the face and has spread to the chest. It hasn't reached the hands and feet yet.",
@@ -77,13 +109,49 @@
           "patient_text": "(Mother) He was born at 39 weeks, normal delivery. Birth weight 3.2 kg. No help breathing needed. Discharged after one day.",
           "examiner_text": "Term (39 weeks), SVD, BW 3.2 kg, APGAR 8 and 9. Discharged at 24 hours.",
           "type": "history",
-          "label": "Birth history"
+          "label": "Birth history",
+          "rules": [
+            {
+              "when": {
+                "ask_count_gte": 1
+              },
+              "text": "(Mother) As I said — term baby, normal delivery, no problems at birth."
+            },
+            {
+              "when": {
+                "register": "terse"
+              },
+              "text": "(Mother) Term. Normal delivery."
+            }
+          ]
         },
         "feeding_history": {
           "patient_text": "(Mother) He is breastfeeding — latching well, every 2–3 hours. Good urine output today. Stool is yellow-green.",
           "examiner_text": "Exclusive breastfeeding, adequate latch. 6 wet nappies. Normal stool colour — no pale/acholic stools.",
           "type": "history",
-          "label": "Feeding"
+          "label": "Feeding",
+          "rules": [
+            {
+              "when": {
+                "ask_count_gte": 1
+              },
+              "text": "(Mother) Same as before — he is breastfeeding, though he tires quickly."
+            },
+            {
+              "when": {
+                "prior_asked_any": [
+                  "hpc_onset"
+                ]
+              },
+              "text": "(Mother) With the yellowing from day 2, feeding has been a bit slower — still on the breast every two to three hours."
+            },
+            {
+              "when": {
+                "register": "terse"
+              },
+              "text": "(Mother) Breastfeeding. A bit slow."
+            }
+          ]
         },
         "blood_group": {
           "patient_text": "(Mother) I am blood group O positive. We don't know the baby's blood group yet.",

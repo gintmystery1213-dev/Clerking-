@@ -6,7 +6,6 @@ void main() {
 
   test('engine regression fixtures (processChat)', () async {
     final report = await runRegression(useProcessChat: true);
-    // Print failures for diagnosis
     // ignore: avoid_print
     print(report);
     expect(
@@ -21,5 +20,12 @@ void main() {
     // ignore: avoid_print
     print(report);
     expect(report.passRate, greaterThanOrEqualTo(0.7));
+  });
+
+  test('conditional reply rules (ask_count)', () async {
+    final report = await runRuleRegression();
+    // ignore: avoid_print
+    print(report);
+    expect(report.failed, 0, reason: report.toString());
   });
 }

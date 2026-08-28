@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Runtime config for Worker + Supabase.
-/// Defaults match the original wrangler.jsonc values.
+/// Runtime config for CLER Worker + Plan/Supabase.
+/// Only public endpoints and **anon** key live here — never service_role.
 class AppConfig {
   AppConfig._();
   static final AppConfig instance = AppConfig._();
@@ -19,6 +19,9 @@ class AppConfig {
   String supabaseAnonKey = defaultSupabaseAnonKey;
   String studentName = 'Anonymous';
 
+  /// When true and online, prefer Worker /chat over local engine for matches.
+  bool preferOnlineEngine = false;
+
   Future<void> load() async {
     final p = await SharedPreferences.getInstance();
     mode = p.getString('mode') ?? 'auto';
@@ -26,6 +29,7 @@ class AppConfig {
     supabaseUrl = p.getString('supabaseUrl') ?? defaultSupabaseUrl;
     supabaseAnonKey = p.getString('supabaseAnonKey') ?? defaultSupabaseAnonKey;
     studentName = p.getString('studentName') ?? 'Anonymous';
+    preferOnlineEngine = p.getBool('preferOnlineEngine') ?? false;
   }
 
   Future<void> save() async {
@@ -35,6 +39,7 @@ class AppConfig {
     await p.setString('supabaseUrl', supabaseUrl.trim());
     await p.setString('supabaseAnonKey', supabaseAnonKey.trim());
     await p.setString('studentName', studentName.trim());
+    await p.setBool('preferOnlineEngine', preferOnlineEngine);
   }
 
   String get workerRoot {
@@ -42,4 +47,11 @@ class AppConfig {
     if (u.endsWith('/')) u = u.substring(0, u.length - 1);
     return u;
   }
+
+  bool get hasWorker => workerBaseUrl.trim().isNotEmpty;
+  bool get hasSupabase =>
+      supabaseUrl.trim().isNotEmpty && supabaseAnonKey.trim().isNotEmpty;
+
+  /// Force offline local-only turns.
+  bool get forceOffline => mode == 'offline';
 }

@@ -131,6 +131,20 @@ Matching uses a **hybrid**:
 Clerks get **no question chips and no examiner mark-sheet leaks** — only patient answers.
 
 
+
+## Live backends (already deployed)
+
+| Service | Default in app |
+|---------|----------------|
+| Cloudflare Worker | `https://bigclerk.workers.dev` (override in Settings if your workers.dev URL differs) |
+| Supabase project | `https://wxmgtugqiisnojqbezby.supabase.co` |
+| Client key | Supabase **anon** JWT only |
+
+Chat path: **local engine → Worker `/get-answer` (reply_bank) → Worker `/ask-question` (queue)**.  
+Optional: enable “prefer online engine” to use Worker `/chat` first when online.
+
+Configure under **Settings**; use **Test connection** to verify Worker + Supabase.
+
 ## On-device neural encoder (small + fast)
 
 Asset: `assets/knowledge/models/minilm_static_96.zlib` (~230KB).
@@ -159,3 +173,12 @@ This is the practical size/quality tradeoff for offline clerking. Full transform
 | 6 | `on_device_encoder.dart` | Compact MiniLM-static vectors |
 
 Keywords and similarity are **sensors**. `resolveMove()` is the decision layer.
+
+
+## CI / GitHub Actions
+
+Workflow: `.github/workflows/build.yml`
+
+On push/PR to `main`: analyze, test, `flutter build apk --release`, upload APK artifact.
+Optional iOS no-codesign build on macOS (main / manual dispatch).
+If platform folders are missing, CI runs `flutter create .` without overwriting `lib/`.

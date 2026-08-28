@@ -4,6 +4,8 @@
 import 'dart:math';
 
 import 'case_schema.dart';
+import 'register_sensor.dart';
+import 'reply_rules.dart';
 import 'dialogue_state.dart';
 import 'intent_patterns.dart';
 import 'miss_log.dart';
@@ -557,6 +559,7 @@ class ChatResult {
   final String? matchSource;
   final String? phase;
   final List<String>? validationWarnings;
+  final String? ruleMatched;
 
   const ChatResult({
     required this.reply,
@@ -576,6 +579,7 @@ class ChatResult {
     this.matchSource,
     this.phase,
     this.validationWarnings,
+    this.ruleMatched,
   });
 
   Map<String, dynamic> toJson() => {
@@ -595,12 +599,30 @@ class ChatResult {
         if (confidence != null) 'confidence': confidence,
         if (matchSource != null) 'matchSource': matchSource,
         if (phase != null) 'phase': phase,
+        if (ruleMatched != null) 'ruleMatched': ruleMatched,
       };
 }
 
-String patientReplyText(Map<String, dynamic> entry, String normText) {
-  final patient = (entry['patient_text'] ?? entry['text'] ?? '') as String;
-  return capPatientReply(patient, normText);
+/// Resolve patient line (rules → fallback) then apply reply-length cap.
+({String text, String ruleMatched}) patientReplyText(
+  Map<String, dynamic> entry,
+  String normText, {
+  required DialogueState state,
+  required String intentId,
+  required Register register,
+  int? priorAskCount,
+}) {
+  final resolved = resolveReplyText(
+    intentEntry: entry,
+    state: state,
+    currentIntentId: intentId,
+    register: register,
+    priorAskCount: priorAskCount,
+  );
+  return (
+    text: capPatientReply(resolved.text, normText),
+    ruleMatched: resolved.ruleMatched,
+  );
 }
 
 String enrichVoice(
@@ -650,6 +672,7 @@ ChatResult processChat({
   final normText = normaliseText(message);
   final rng = Random();
   state.noteStudent(normText);
+  final register = classifyRegister(normText);
 
   List<String>? schemaWarnings;
   if (validateCaseSchema) {
@@ -713,15 +736,25 @@ ChatResult processChat({
     final matchedIds = <String>[];
     final replies = <String>[];
     final scoredRows = <Map<String, dynamic>>[];
+    String? clusterRule;
     for (final id in clusterIntentIds) {
       if (askedIntents.contains(id)) continue;
       final entry = intentMap[id] as Map<String, dynamic>?;
       if (entry == null) continue;
+      final prior = state.intentAskCount[id] ?? 0;
+      state.updateTrust(register: register, intentId: id);
+      final resolved = patientReplyText(
+        entry,
+        normText,
+        state: state,
+        intentId: id,
+        register: register,
+        priorAskCount: prior,
+      );
       matchedIds.add(id);
       scoredRows.add({'intentId': id, 'label': entry['label']});
-      replies.add(
-        '[${entry['label']}] ${patientReplyText(entry, normText)}',
-      );
+      replies.add('[${entry['label']}] ${resolved.text}');
+      clusterRule ??= resolved.ruleMatched;
       state.setTopic(id);
       state.markTest(id);
       state.markFinding(id);
@@ -749,6 +782,7 @@ ChatResult processChat({
       matchSource: 'cluster',
       phase: detectPhase(normText).name,
       validationWarnings: schemaWarnings,
+      ruleMatched: clusterRule,
     );
   }
 
@@ -793,6 +827,7 @@ ChatResult processChat({
     final replies = <String>[];
     String? primaryPearl;
     MatchSource? src;
+    String? lastRuleMatched;
 
     for (final m in decision.matches) {
       final intentId = m.intentId;
@@ -814,9 +849,19 @@ ChatResult processChat({
         continue;
       }
       matchedIds.add(intentId);
-      var text = patientReplyText(entry, normText);
-      text = enrichVoice(
-        text,
+      final prior = state.intentAskCount[intentId] ?? 0;
+      state.updateTrust(register: register, intentId: intentId);
+      final resolved = patientReplyText(
+        entry,
+        normText,
+        state: state,
+        intentId: intentId,
+        register: register,
+        priorAskCount: prior,
+      );
+      lastRuleMatched = resolved.ruleMatched;
+      var text = enrichVoice(
+        resolved.text,
         temperament,
         distressIntents.contains(intentId),
         rng,
@@ -878,6 +923,7 @@ ChatResult processChat({
       matchSource: src?.name ?? decision.reason,
       phase: decision.phase.name,
       validationWarnings: schemaWarnings,
+      ruleMatched: lastRuleMatched,
     );
   }
 
