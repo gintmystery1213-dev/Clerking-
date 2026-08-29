@@ -1,33 +1,36 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Runtime config for CLER Worker + Plan/Supabase.
-/// Only public endpoints and **anon** key live here — never service_role.
+/// Runtime config for CLER.
+///
+/// Backend endpoints and the Supabase anon key are **baked in** — never
+/// shown or editable in the UI. Only user preferences (mode, display name)
+/// are persisted locally.
 class AppConfig {
   AppConfig._();
   static final AppConfig instance = AppConfig._();
 
-  static const defaultWorkerBaseUrl = 'https://bigclerk.workers.dev';
-  static const defaultSupabaseUrl =
+  // ── Hard-wired backends (not user-facing) ──────────────────────────────
+  static const String _workerBaseUrl = 'https://bigclerk.grentwalter300.workers.dev';
+  static const String _supabaseUrl =
       'https://wxmgtugqiisnojqbezby.supabase.co';
-  static const defaultSupabaseAnonKey =
+  static const String _supabaseAnonKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4bWd0dWdxaWlzbm9qcWJlemJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMTE4NTgsImV4cCI6MjA5MzU4Nzg1OH0.wo1sYZnxBrsjuWvP11luDWkKXesrghMQifM_qVMfZIU';
 
   /// auto | online | offline
   String mode = 'auto';
-  String workerBaseUrl = defaultWorkerBaseUrl;
-  String supabaseUrl = defaultSupabaseUrl;
-  String supabaseAnonKey = defaultSupabaseAnonKey;
   String studentName = 'Anonymous';
 
   /// When true and online, prefer Worker /chat over local engine for matches.
+  /// Kept internal (not exposed in Settings) — local-first is the default.
   bool preferOnlineEngine = false;
+
+  String get workerBaseUrl => _workerBaseUrl;
+  String get supabaseUrl => _supabaseUrl;
+  String get supabaseAnonKey => _supabaseAnonKey;
 
   Future<void> load() async {
     final p = await SharedPreferences.getInstance();
     mode = p.getString('mode') ?? 'auto';
-    workerBaseUrl = p.getString('workerBaseUrl') ?? defaultWorkerBaseUrl;
-    supabaseUrl = p.getString('supabaseUrl') ?? defaultSupabaseUrl;
-    supabaseAnonKey = p.getString('supabaseAnonKey') ?? defaultSupabaseAnonKey;
     studentName = p.getString('studentName') ?? 'Anonymous';
     preferOnlineEngine = p.getBool('preferOnlineEngine') ?? false;
   }
@@ -35,9 +38,6 @@ class AppConfig {
   Future<void> save() async {
     final p = await SharedPreferences.getInstance();
     await p.setString('mode', mode);
-    await p.setString('workerBaseUrl', workerBaseUrl.trim());
-    await p.setString('supabaseUrl', supabaseUrl.trim());
-    await p.setString('supabaseAnonKey', supabaseAnonKey.trim());
     await p.setString('studentName', studentName.trim());
     await p.setBool('preferOnlineEngine', preferOnlineEngine);
   }

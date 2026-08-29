@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            tooltip: 'Connection settings',
+            tooltip: 'Settings',
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
               Navigator.of(context).push(
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'Practice history-taking with virtual patients.\n'
-                'Worker + Supabase when online · local engine offline.',
+                'Works fully offline — online features when available.',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -76,8 +76,8 @@ class HomeScreen extends StatelessWidget {
                     MaterialPageRoute(builder: (_) => const SettingsScreen()),
                   );
                 },
-                icon: const Icon(Icons.cloud_outlined),
-                label: const Text('Worker & Supabase settings'),
+                icon: const Icon(Icons.settings_outlined),
+                label: const Text('Settings'),
               ),
               const Spacer(),
             ],

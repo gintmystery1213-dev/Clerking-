@@ -13,7 +13,7 @@ import 'worker_api.dart';
 ///   3. If still a miss → POST Worker /ask-question (Plan pending_questions queue).
 ///   4. Optional: prefer Worker /chat when [AppConfig.preferOnlineEngine].
 ///
-/// Secrets stay off-device: only Worker URL + Supabase anon key in [AppConfig].
+/// Backend URLs and anon key are baked into AppConfig (not user-editable).
 class IntegrationHub {
   IntegrationHub({
     WorkerApi? worker,
